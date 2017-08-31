@@ -35,7 +35,7 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return "Local Nut Activity";
+            return this.State.ToString();
         }
         public override string GetBalloonTipTitle()
         {

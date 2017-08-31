@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SquirrelFinder.Nuts;
+using System.Diagnostics;
 
 namespace SquirrelFinder.Forms.UserControls
 {
@@ -45,6 +46,11 @@ namespace SquirrelFinder.Forms.UserControls
                 var n = (ILocalNut)n2;
                 n.RecycleSite();
             }
+        }
+
+        private void linkLabelUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("chrome.exe", n2.Url.ToString());
         }
     }
 }

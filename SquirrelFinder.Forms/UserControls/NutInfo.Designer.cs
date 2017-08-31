@@ -72,6 +72,7 @@
             this.linkLabelUrl.TabIndex = 3;
             this.linkLabelUrl.TabStop = true;
             this.linkLabelUrl.Text = "linkLabel1";
+            this.linkLabelUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUrl_LinkClicked);
             // 
             // buttonRemove
             // 

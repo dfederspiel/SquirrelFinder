@@ -84,14 +84,9 @@ namespace SquirrelFinder.Nuts
             return HttpStatusCode.NotFound;
         }
 
-        public virtual string GetInfo()
-        {
-            return Url.ToString();
-        }
-
         public virtual string GetBalloonTipInfo()
         {
-            return "Regular Nut Activity";
+            return this.State.ToString();
         }
 
         public virtual string GetBalloonTipTitle()

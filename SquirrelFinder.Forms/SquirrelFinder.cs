@@ -1,6 +1,7 @@
 ﻿using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace SquirrelFinder.Forms
     public class SquirrelFinderSysTrayApp : Form
     {
         static NutMonitor _nutMonitor;
-        static System.Timers.Timer _timer;
+        static System.Windows.Forms.Timer _timer;
         static NotifyIcon _trayIcon;
         static ContextMenuStrip _trayMenu;
         static Config _configForm;
@@ -26,11 +27,51 @@ namespace SquirrelFinder.Forms
         public SquirrelFinderSysTrayApp()
         {
             _nutMonitor = new NutMonitor();
-
+            _nutMonitor.NutsChanged += _nutMonitor_NutsChanged;
+            _nutMonitor.NutChanged += _nutMonitor_NutChanged;
             ConfigureTrayMenu();
             ConfigureTrayIcon();
 
             SetTimer(5000);
+        }
+
+        private void _nutMonitor_NutsChanged(object sender, NutCollectionEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void _nutMonitor_NutChanged(object sender, NutEventArgs e)
+        {
+            var nut = e.Nut;
+
+            var tone = SquirrelFinderSound.None;
+
+            if (nut.State == NutState.Found)
+            {
+                _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
+                tone = SquirrelFinderSound.Squirrel;
+            }
+            else if (nut.State == NutState.Searching)
+            {
+                _trayIcon.BalloonTipIcon = ToolTipIcon.Warning;
+                tone = SquirrelFinderSound.Gears;
+            }
+            else if (nut.State == NutState.Lost)
+            {
+                _trayIcon.BalloonTipIcon = ToolTipIcon.Error;
+                tone = SquirrelFinderSound.FlatLine;
+            }
+            else
+                _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
+
+            if (!nut.HasShownMessage)
+            {
+                _trayIcon.BalloonTipTitle = nut.GetBalloonTipTitle();
+                _trayIcon.BalloonTipText = nut.GetBalloonTipInfo();
+                _trayIcon.ShowBalloonTip(5000);
+                _nutMonitor.PlayTone(tone);
+                nut.HasShownMessage = true;
+            }
         }
 
         #region Configuration
@@ -46,9 +87,16 @@ namespace SquirrelFinder.Forms
         }
         private void SetTimer(int interval)
         {
-            _timer = new System.Timers.Timer(interval);
-            _timer.Elapsed += Timer_Elapsed;
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 5000;
+            _timer.Tick += _timer_Tick;
             _timer.Start();
+        }
+
+        private async void _timer_Tick(object sender, EventArgs e)
+        {
+            if (_nutMonitor == null) return;
+            await _nutMonitor.PeekAll();
         }
         #endregion
 
@@ -76,7 +124,7 @@ namespace SquirrelFinder.Forms
         private void _trayIcon_BalloonTipClicked(object sender, EventArgs e)
         {
             var url = _nutMonitor.Nuts.Select(n => n.Url.ToString()).First();
-            System.Diagnostics.Process.Start(url);
+            Process.Start("chrome.exe", url);
         }
         #endregion
 
@@ -97,12 +145,6 @@ namespace SquirrelFinder.Forms
 
             _configForm.Show();
 
-        }
-
-        private async void Timer_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            if (_nutMonitor == null) return;
-            await _nutMonitor.PeekAll();
         }
 
         protected override void OnLoad(EventArgs e)
