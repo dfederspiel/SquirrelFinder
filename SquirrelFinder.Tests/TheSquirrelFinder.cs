@@ -20,7 +20,7 @@ namespace SquirrelFinder.Tests
         public void Setup()
         {
             _monitor = new NutMonitor();
-            _nut = new Nut("http://localhost");
+            _nut = new Nut(new Uri("http://localhost"));
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace SquirrelFinder.Tests
         [TestMethod]
         public void GivenANutPeeksANut()
         {
-            _monitor.AddNut(new Nut("http://google.com"));
+            _monitor.AddNut(new Nut(new Uri("http://google.com")));
             var response = _monitor.Nuts.FirstOrDefault().Peek();
             Assert.AreEqual(HttpStatusCode.OK, response);
         }
@@ -71,21 +71,12 @@ namespace SquirrelFinder.Tests
         [TestMethod]
         public async Task GivenManyNutsPeeksAllNuts()
         {
-            _monitor.AddNut(new Nut("http://google.com"));
-            _monitor.AddNut(new Nut("http://github.com"));
-            _monitor.AddNut(new Nut("http://codewars.com"));
-            _monitor.AddNut(new Nut("http://localhost.com"));
-            _monitor.AddNut(new Nut("http://examples.local"));
+            _monitor.AddNut(new Nut(new Uri("http://google.com")));
+            _monitor.AddNut(new Nut(new Uri("http://github.com")));
+            _monitor.AddNut(new Nut(new Uri("http://codewars.com")));
+            _monitor.AddNut(new Nut(new Uri("http://localhost.com")));
+            _monitor.AddNut(new Nut(new Uri("http://examples.local")));
             await _monitor.PeekAll();
-        }
-
-        [TestMethod]
-        public void GivenABadUrlReturnsNull()
-        {
-            _monitor.AddNut(new Nut("http://lkjlkjlkjlkj"));
-            var response = _monitor.Nuts.FirstOrDefault().Peek();
-            Console.WriteLine(response);
-            Assert.AreEqual(HttpStatusCode.NotFound, response);
         }
 
         [TestMethod]
@@ -106,14 +97,14 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _monitor = new NutMonitor();
-                _monitor.AddNut(new LocalNut("http://localhost"));
+                _monitor.AddNut(new LocalNut(new Uri("http://localhost")));
             }
 
             [Ignore]
             [TestMethod]
             public void CanRecycleAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut("http://basitefinityoob.local"));
+                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
                 _monitor._nuts.ForEach(n => {
                     if(n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
@@ -127,7 +118,7 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void CanStartAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut("http://basitefinityoob.local"));
+                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
                 _monitor._nuts.ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
@@ -141,7 +132,7 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void CanStopAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut("http://basitefinityoob.local"));
+                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
                 _monitor._nuts.ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
@@ -171,7 +162,7 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _monitor = new NutMonitor();
-                _nut = new Nut("http://google.com");
+                _nut = new Nut(new Uri("http://google.com"));
             }
 
             [TestMethod]
@@ -195,7 +186,7 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _finder = new NutMonitor();
-                _finder.AddNut(new SitefinityNut("http://basitefinityoob.local"));
+                _finder.AddNut(new SitefinityNut(new Uri("http://basitefinityoob.local")));
             }
         }
 
@@ -207,7 +198,7 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _nutWatcher = new NutMonitor();
-                _nutWatcher.AddNut(new SitefinityLocalNut("http://basitefinity.local"));
+                _nutWatcher.AddNut(new SitefinityLocalNut(new Uri("http://basitefinity.local")));
             }
 
             [TestMethod]

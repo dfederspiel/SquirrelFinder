@@ -59,13 +59,20 @@ namespace SquirrelFinder.Forms
         private void buttonAddPublicSite_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxPublicUrl.Text)) return;
+            try
+            {
+                var uri = new Uri(textBoxPublicUrl.Text);
+                var nut = new Nut(uri);
+                nut.NutChanged += Nut_NutChanged;
+                _squirrelFinder.AddNut(nut);
+                UpdateWatchList();
 
-            var nut = new Nut(textBoxPublicUrl.Text);
-            nut.NutChanged += Nut_NutChanged;
-            _squirrelFinder.AddNut(nut);
-            UpdateWatchList();
-
-            textBoxPublicUrl.Clear();
+                textBoxPublicUrl.Clear();
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void Nut_NutChanged(object sender, NutEventArgs e)
@@ -114,16 +121,16 @@ namespace SquirrelFinder.Forms
         private void buttonAddToWatch_Click(object sender, EventArgs e)
         {
             if (listBoxAvailableBindings.SelectedItem == null) return;
-
-            if (Directory.Exists(_squirrelFinder.GetSitePathFromUrl(listBoxAvailableBindings.SelectedItem.ToString()) + "/App_Data/Sitefinity"))
+            var url = new Uri(listBoxAvailableBindings.SelectedItem.ToString());
+            if (Directory.Exists(_squirrelFinder.GetSitePathFromUrl(url.ToString()) + "/App_Data/Sitefinity"))
             {
-                var sitefinityLocalNut = new SitefinityLocalNut(listBoxAvailableBindings.SelectedItem.ToString());
+                var sitefinityLocalNut = new SitefinityLocalNut(url);
                 sitefinityLocalNut.NutChanged += Nut_NutChanged;
                 _squirrelFinder.AddNut(sitefinityLocalNut);
             }
             else
             {
-                var localNut = new LocalNut(listBoxAvailableBindings.SelectedItem.ToString());
+                var localNut = new LocalNut(url);
                 localNut.NutChanged += Nut_NutChanged;
                 _squirrelFinder.AddNut(localNut);
             }

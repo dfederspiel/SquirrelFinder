@@ -11,7 +11,7 @@ namespace SquirrelFinder.Nuts
     public class SitefinityLocalNut : LocalNut
     {
         FileSystemWatcher _watcher;
-        public SitefinityLocalNut(string url) : base(url)
+        public SitefinityLocalNut(Uri url) : base(url)
         {
             _watcher = new FileSystemWatcher();
         }
