@@ -97,6 +97,7 @@ namespace SquirrelFinder.Forms
                 _trayIcon.BalloonTipTitle = nut.GetBalloonTipTitle();
                 _trayIcon.BalloonTipText = nut.GetBalloonTipInfo();
                 _trayIcon.ShowBalloonTip(5000);
+                _squirrelFinder.PlayTone(SquirrelFinderSound.Squirrel);
                 nut.HasShownMessage = true;
             }
         }

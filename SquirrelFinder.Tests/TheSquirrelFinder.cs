@@ -45,14 +45,14 @@ namespace SquirrelFinder.Tests
         }
 
         [TestMethod]
-        public void CanAddANut()
+        public void GivenANutAddsANut()
         {
             _monitor.AddNut(_nut);
             Assert.AreEqual("localhost", _monitor.Nuts.FirstOrDefault().Url.Host);
         }
 
         [TestMethod]
-        public void CanRemoveANut()
+        public void GivenANutRemovesANut()
         {
             _monitor.AddNut(_nut);
             _monitor.RemoveNut(_nut);
@@ -60,7 +60,7 @@ namespace SquirrelFinder.Tests
         }
 
         [TestMethod]
-        public void CanPeekANut()
+        public void GivenANutPeeksANut()
         {
             _monitor.AddNut(new Nut("http://google.com"));
             var response = _monitor.Nuts.FirstOrDefault().Peek();
@@ -69,7 +69,7 @@ namespace SquirrelFinder.Tests
 
         [Ignore]
         [TestMethod]
-        public async Task CanPeekAllNuts()
+        public async Task GivenManyNutsPeeksAllNuts()
         {
             _monitor.AddNut(new Nut("http://google.com"));
             _monitor.AddNut(new Nut("http://github.com"));
