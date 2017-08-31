@@ -70,24 +70,6 @@ namespace SquirrelFinder.Forms
             configForm.Show();
         }
 
-        private void OnWatchList(object sender, EventArgs e)
-        {
-            WatchList l = new WatchList(_finder);
-            l.Show();
-        }
-
-        private void OnWatchRemote(object sender, EventArgs e)
-        {
-            WatchRemote r = new WatchRemote(_finder);
-            r.Show();
-        }
-
-        private void OnWatchLocal(object sender, EventArgs e)
-        {
-            WatchLocal w = new WatchLocal(_finder);
-            w.Show();
-        }
-
         //private void TrayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         //{
         //    Watch w = new Watch(_finder);
