@@ -51,9 +51,14 @@ namespace SquirrelFinder.Nuts
             return HttpStatusCode.NotFound;
         }
 
-        public override string GetInfo()
+        public override string GetBalloonTipInfo()
         {
-            return "This is a Local Sitefinity Nut";
+            return "Local Sitefinity Nut Activity";
+        }
+
+        public override string GetBalloonTipTitle()
+        {
+            return "Local Sitefinity Nut Activity";
         }
     }
 }

@@ -12,6 +12,7 @@ namespace SquirrelFinder.Nuts
 
         HttpStatusCode Peek(int timeout = 5000);
 
-        string GetInfo();
+        string GetBalloonTipInfo();
+        string GetBalloonTipTitle();
     }
 }

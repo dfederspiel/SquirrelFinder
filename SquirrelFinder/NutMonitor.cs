@@ -33,8 +33,8 @@ namespace SquirrelFinder
         static string _gearsSound = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\gears.wav";
         static string _flatLine = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\flatline.wav";
 
-        readonly public List<INut> _nuts;
-        public IQueryable<INut> Nuts { get { return _nuts.AsQueryable(); } }
+        public List<INut> _nuts;
+        public IQueryable<INut> Nuts { get { return _nuts.AsQueryable(); } set { _nuts = value.ToList(); } }
 
         public NutMonitor()
         {

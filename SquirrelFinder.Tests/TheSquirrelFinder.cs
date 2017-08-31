@@ -67,6 +67,7 @@ namespace SquirrelFinder.Tests
             Assert.AreEqual(HttpStatusCode.OK, response);
         }
 
+        [Ignore]
         [TestMethod]
         public async Task CanPeekAllNuts()
         {
@@ -108,6 +109,7 @@ namespace SquirrelFinder.Tests
                 _monitor.AddNut(new LocalNut("http://localhost"));
             }
 
+            [Ignore]
             [TestMethod]
             public void CanRecycleAppPool()
             {
@@ -121,6 +123,7 @@ namespace SquirrelFinder.Tests
                 });
             }
 
+            [Ignore]
             [TestMethod]
             public void CanStartAppPool()
             {
@@ -134,6 +137,7 @@ namespace SquirrelFinder.Tests
                 });
             }
 
+            [Ignore]
             [TestMethod]
             public void CanStopAppPool()
             {
@@ -161,12 +165,25 @@ namespace SquirrelFinder.Tests
         }
 
         [TestClass]
-        public class InititializedWithAPublicSite
+        public class InititializedWithARegularNut
         {
             [TestInitialize]
             public void Setup()
             {
                 _monitor = new NutMonitor();
+                _nut = new Nut("http://google.com");
+            }
+
+            [TestMethod]
+            public void CanPeekUrl()
+            {
+                _nut.Peek();
+            }
+
+            [TestMethod]
+            public void CanGetBalloonTipInfo()
+            {
+                _nut.GetBalloonTipInfo();
             }
         }
 
@@ -178,7 +195,7 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _finder = new NutMonitor();
-                _finder.AddNut(new SitefinityNut("http://basitefinityoob.local/"));
+                _finder.AddNut(new SitefinityNut("http://basitefinityoob.local"));
             }
         }
 
@@ -190,13 +207,7 @@ namespace SquirrelFinder.Tests
             public void Setup()
             {
                 _nutWatcher = new NutMonitor();
-                _nutWatcher.AddNut(new SitefinityLocalNut("http://basitefinity.local/"));
-            }
-
-            [TestMethod]
-            public void CanGetInfo()
-            {
-                _nutWatcher.Nuts.First().GetInfo();
+                _nutWatcher.AddNut(new SitefinityLocalNut("http://basitefinity.local"));
             }
 
             [TestMethod]

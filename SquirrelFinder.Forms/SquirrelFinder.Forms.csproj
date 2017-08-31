@@ -52,10 +52,16 @@
     <Compile Include="Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs">
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SquirrelFinder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SquirrelFinderApp.cs" />
     <EmbeddedResource Include="Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +74,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SquirrelFinder.resx">
+      <DependentUpon>SquirrelFinder.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\SquirrelFinder.INut.datasource" />
     <None Include="Properties\DataSources\SquirrelFinder.Nut.datasource" />
     <None Include="Properties\Settings.settings">
@@ -88,6 +101,10 @@
       <Project>{29cce6b1-9d49-4270-b5f1-505618e20cb9}</Project>
       <Name>SquirrelFinder</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\squirrel.ico" />
+    <None Include="Resources\Squirrel.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

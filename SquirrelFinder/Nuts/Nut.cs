@@ -80,6 +80,16 @@ namespace SquirrelFinder.Nuts
         {
             return Url.ToString();
         }
+
+        public virtual string GetBalloonTipInfo()
+        {
+            return "Regular Nut Activity";
+        }
+
+        public virtual string GetBalloonTipTitle()
+        {
+            return "Regular Nut Activity";
+        }
     }
 
    

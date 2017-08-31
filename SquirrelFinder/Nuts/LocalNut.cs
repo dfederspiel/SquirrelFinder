@@ -33,6 +33,15 @@ namespace SquirrelFinder.Nuts
             }
         }
 
+        public override string GetBalloonTipInfo()
+        {
+            return "Local Nut Activity";
+        }
+        public override string GetBalloonTipTitle()
+        {
+            return "Local Nut Activity";
+        }
+
         public virtual IQueryable<string> GetSiteBindingUrls()
         {
             var urls = new List<string>();
