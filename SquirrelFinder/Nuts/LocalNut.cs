@@ -21,9 +21,9 @@ namespace SquirrelFinder.Nuts
 
         private void _setSiteFromUrl(Uri url)
         {
-            foreach(var site in _manager.Sites)
+            foreach (var site in _manager.Sites)
             {
-                foreach(var binding in site.Bindings)
+                foreach (var binding in site.Bindings)
                 {
                     if (binding.Host == (binding.Host == "" ? "" : url.Host) && binding.Protocol == url.Scheme)
                     {
@@ -35,7 +35,7 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return "Local Nut Activity";
+            return this.State.ToString();
         }
         public override string GetBalloonTipTitle()
         {
@@ -61,8 +61,9 @@ namespace SquirrelFinder.Nuts
 
         public void RecycleSite()
         {
-            if(_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
+            if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
                 _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Recycle();
+
         }
 
         public void StopSite()
