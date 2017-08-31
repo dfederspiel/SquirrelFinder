@@ -24,7 +24,7 @@ namespace SquirrelFinder
     {
         static SoundPlayer _player = new SoundPlayer();
         SquirrelFinderSound _currentSound = SquirrelFinderSound.None;
-
+        public event EventHandler<NutCollectionEventArgs> NutsChanged;
         FileSystemWatcher watcher = new FileSystemWatcher();
 
         public NutState CurrentState = NutState.Found;
@@ -39,6 +39,11 @@ namespace SquirrelFinder
         public NutMonitor()
         {
             _nuts = new List<INut>();
+        }
+
+        public virtual void OnNutsChanged(NutCollectionEventArgs e)
+        {
+            NutsChanged?.Invoke(this, e);
         }
 
         #region IISSiteTools
@@ -81,12 +86,13 @@ namespace SquirrelFinder
 
         #endregion
 
-        public void AddNut(INut site)
+        public void AddNut(INut nut)
         {
             lock (_nuts)
             {
-                _nuts.Add(site);
+                _nuts.Add(nut);
             }
+            OnNutsChanged(new NutCollectionEventArgs(_nuts));
         }
 
         public void RemoveNut(INut site)
@@ -95,6 +101,7 @@ namespace SquirrelFinder
             {
                 _nuts.Remove(site);
             }
+            OnNutsChanged(new NutCollectionEventArgs(_nuts));
         }
 
         public async Task PeekAll()

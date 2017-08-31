@@ -24,6 +24,15 @@ namespace SquirrelFinder.Nuts
         }
     }
 
+    public class NutCollectionEventArgs : EventArgs
+    {
+        public List<INut> Nuts { get; set; }
+        public NutCollectionEventArgs(List<INut> nuts)
+        {
+            Nuts = nuts;
+        }
+    }
+
     public class Nut : INut
     {
         public Uri Url { get; set; }
