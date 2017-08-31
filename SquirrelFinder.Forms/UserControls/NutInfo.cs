@@ -40,7 +40,11 @@ namespace SquirrelFinder.Forms.UserControls
 
         private void ButtonRecycle_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if(n2.GetType().GetInterfaces().Where(i => i.Name == "ILocalNut").Count() > 0)
+            {
+                var n = (ILocalNut)n2;
+                n.RecycleSite();
+            }
         }
     }
 }
