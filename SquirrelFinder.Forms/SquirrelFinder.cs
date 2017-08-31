@@ -70,6 +70,13 @@ namespace SquirrelFinder.Forms
             _trayIcon.ContextMenuStrip = _trayMenu;
             _trayIcon.Visible = true;
             _trayIcon.DoubleClick += TrayIcon_DoubleClick;
+            _trayIcon.BalloonTipClicked += _trayIcon_BalloonTipClicked;
+        }
+
+        private void _trayIcon_BalloonTipClicked(object sender, EventArgs e)
+        {
+            var url = _nutMonitor.Nuts.Select(n => n.Url.ToString()).First();
+            System.Diagnostics.Process.Start(url);
         }
         #endregion
 

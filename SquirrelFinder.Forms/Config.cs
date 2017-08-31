@@ -26,8 +26,6 @@ namespace SquirrelFinder.Forms
             _squirrelFinder = finder == null ? new NutMonitor() : finder;
             _squirrelFinder.NutsChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
-            _trayIcon.BalloonTipClicked += _trayIcon_BalloonTipClicked;
-
             InitializeComponent();
             InitializeLocalSites();
 
@@ -61,11 +59,6 @@ namespace SquirrelFinder.Forms
             {
                 flowLayoutPanel1.Controls.Add(new NutInfo(nut, _squirrelFinder));
             }
-        }
-
-        private void _trayIcon_BalloonTipClicked(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(_squirrelFinder.Nuts.Select(n => n.Url.ToString()).First());
         }
 
         private void InitializeLocalSites()
