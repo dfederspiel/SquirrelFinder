@@ -53,7 +53,7 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return "Local Sitefinity Nut Activity";
+            return this.State.ToString();
         }
 
         public override string GetBalloonTipTitle()

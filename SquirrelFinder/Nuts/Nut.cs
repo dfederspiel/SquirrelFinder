@@ -24,6 +24,15 @@ namespace SquirrelFinder.Nuts
         }
     }
 
+    public class NutCollectionEventArgs : EventArgs
+    {
+        public List<INut> Nuts { get; set; }
+        public NutCollectionEventArgs(List<INut> nuts)
+        {
+            Nuts = nuts;
+        }
+    }
+
     public class Nut : INut
     {
         public Uri Url { get; set; }
@@ -75,14 +84,9 @@ namespace SquirrelFinder.Nuts
             return HttpStatusCode.NotFound;
         }
 
-        public virtual string GetInfo()
-        {
-            return Url.ToString();
-        }
-
         public virtual string GetBalloonTipInfo()
         {
-            return "Regular Nut Activity";
+            return this.State.ToString();
         }
 
         public virtual string GetBalloonTipTitle()

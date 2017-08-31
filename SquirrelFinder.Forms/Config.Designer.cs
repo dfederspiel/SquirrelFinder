@@ -39,8 +39,7 @@ namespace SquirrelFinder.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLocalSites = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkedListBoxWatching = new System.Windows.Forms.CheckedListBox();
-            this.buttonRemoveSelected = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.textBoxPublicUrl = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonAddPublicSite = new System.Windows.Forms.Button();
@@ -141,35 +140,22 @@ namespace SquirrelFinder.Forms
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.groupBox2.Controls.Add(this.checkedListBoxWatching);
-            this.groupBox2.Controls.Add(this.buttonRemoveSelected);
+            this.groupBox2.Controls.Add(this.flowLayoutPanel1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(416, 137);
+            this.groupBox2.Location = new System.Drawing.Point(386, 137);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(390, 372);
+            this.groupBox2.Size = new System.Drawing.Size(420, 372);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Watching";
             // 
-            // checkedListBoxWatching
+            // flowLayoutPanel1
             // 
-            this.checkedListBoxWatching.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBoxWatching.FormattingEnabled = true;
-            this.checkedListBoxWatching.Location = new System.Drawing.Point(6, 47);
-            this.checkedListBoxWatching.Name = "checkedListBoxWatching";
-            this.checkedListBoxWatching.Size = new System.Drawing.Size(377, 274);
-            this.checkedListBoxWatching.TabIndex = 6;
-            // 
-            // buttonRemoveSelected
-            // 
-            this.buttonRemoveSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRemoveSelected.Location = new System.Drawing.Point(259, 329);
-            this.buttonRemoveSelected.Name = "buttonRemoveSelected";
-            this.buttonRemoveSelected.Size = new System.Drawing.Size(125, 37);
-            this.buttonRemoveSelected.TabIndex = 5;
-            this.buttonRemoveSelected.Text = "Remove";
-            this.buttonRemoveSelected.UseVisualStyleBackColor = true;
-            this.buttonRemoveSelected.Click += new System.EventHandler(this.buttonRemoveSelected_Click);
+            this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 39);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(408, 327);
+            this.flowLayoutPanel1.TabIndex = 7;
             // 
             // textBoxPublicUrl
             // 
@@ -336,8 +322,6 @@ namespace SquirrelFinder.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxLocalSites;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBoxWatching;
-        private System.Windows.Forms.Button buttonRemoveSelected;
         private System.Windows.Forms.TextBox textBoxPublicUrl;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonAddPublicSite;
@@ -353,5 +337,6 @@ namespace SquirrelFinder.Forms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
