@@ -9,48 +9,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace SquirrelFinder.Forms
 {
     public partial class Config : Form
     {
+
         NutMonitor _squirrelFinder;
         NotifyIcon _trayIcon;
-        BindingSource _nutBindingSource;
+
         public Config(NutMonitor finder, NotifyIcon trayIcon)
         {
             _squirrelFinder = finder == null ? new NutMonitor() : finder;
- 
+
             _trayIcon = trayIcon;
             _trayIcon.BalloonTipClicked += _trayIcon_BalloonTipClicked;
 
             InitializeComponent();
             InitializeLocalSites();
-
-            _nutBindingSource = new BindingSource();
-            _nutBindingSource.DataSource = typeof(SquirrelFinder.Nuts.INut);
-            dataGridView1.AutoGenerateColumns = false;
-
-            DataGridViewTextBoxColumn col1 = new DataGridViewTextBoxColumn();
-            col1.DataPropertyName = "IsLocal";
-            col1.HeaderText = "Is Local";
-            col1.Name = "column_is_local";
-            dataGridView1.Columns.Add(col1);
-
-            DataGridViewTextBoxColumn col2 = new DataGridViewTextBoxColumn();
-            col2.DataPropertyName = "Location";
-            col2.HeaderText = "Location";
-            col2.Name = "column_location";
-            dataGridView1.Columns.Add(col2);
-
-            DataGridViewTextBoxColumn col3 = new DataGridViewTextBoxColumn();
-            col2.DataPropertyName = "State";
-            col2.HeaderText = "State";
-            col2.Name = "column_state";
-            dataGridView1.Columns.Add(col3);
-
-            _nutBindingSource.DataSource = _squirrelFinder.Nuts;
-            dataGridView1.DataSource = _nutBindingSource;
 
             UpdateWatchList();
         }
@@ -77,10 +54,6 @@ namespace SquirrelFinder.Forms
         {
             checkedListBoxWatching.Items.Clear();
             checkedListBoxWatching.Items.AddRange(_squirrelFinder.Nuts.Select(n => n.Url).ToArray());
-
-            _nutBindingSource.DataSource = _squirrelFinder.Nuts.ToList();
-            dataGridView1.DataSource = _nutBindingSource;
-
         }
 
         private void buttonAddPublicSite_Click(object sender, EventArgs e)
@@ -98,17 +71,21 @@ namespace SquirrelFinder.Forms
         private void Nut_NutChanged(object sender, NutEventArgs e)
         {
             var nut = e.Nut;
+
             var tone = SquirrelFinderSound.None;
 
-            if (nut.State == NutState.Found) {
+            if (nut.State == NutState.Found)
+            {
                 _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
                 tone = SquirrelFinderSound.Squirrel;
             }
-            else if (nut.State == NutState.Searching) { 
+            else if (nut.State == NutState.Searching)
+            {
                 _trayIcon.BalloonTipIcon = ToolTipIcon.Warning;
                 tone = SquirrelFinderSound.Gears;
             }
-            else if (nut.State == NutState.Lost) { 
+            else if (nut.State == NutState.Lost)
+            {
                 _trayIcon.BalloonTipIcon = ToolTipIcon.Error;
                 tone = SquirrelFinderSound.FlatLine;
             }
@@ -117,8 +94,8 @@ namespace SquirrelFinder.Forms
 
             if (!nut.HasShownMessage)
             {
-                _trayIcon.BalloonTipTitle = "Nut Activity: " + nut.Url.ToString();
-                _trayIcon.BalloonTipText = nut.GetInfo();
+                _trayIcon.BalloonTipTitle = nut.GetBalloonTipTitle();
+                _trayIcon.BalloonTipText = nut.GetBalloonTipInfo();
                 _trayIcon.ShowBalloonTip(5000);
                 nut.HasShownMessage = true;
             }
@@ -149,7 +126,7 @@ namespace SquirrelFinder.Forms
                 localNut.NutChanged += Nut_NutChanged;
                 _squirrelFinder.AddNut(localNut);
             }
-                
+
             UpdateWatchList();
         }
     }
