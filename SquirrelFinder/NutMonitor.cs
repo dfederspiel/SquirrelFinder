@@ -25,9 +25,8 @@ namespace SquirrelFinder
         static SoundPlayer _player = new SoundPlayer();
         SquirrelFinderSound _currentSound = SquirrelFinderSound.None;
 
-        public event EventHandler<NutCollectionEventArgs> NutsChanged;
+        public event EventHandler<NutCollectionEventArgs> NutCollectionChanged;
         public event EventHandler<NutEventArgs> NutChanged;
-
 
         FileSystemWatcher watcher = new FileSystemWatcher();
 
@@ -37,7 +36,7 @@ namespace SquirrelFinder
         static string _gearsSound = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\gears.wav";
         static string _flatLine = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\flatline.wav";
 
-        public List<INut> _nuts;
+        private List<INut> _nuts;
         public IQueryable<INut> Nuts { get { return _nuts.AsQueryable(); } set { _nuts = value.ToList(); } }
 
         public NutMonitor()
@@ -45,9 +44,9 @@ namespace SquirrelFinder
             _nuts = new List<INut>();
         }
 
-        public virtual void OnNutsChanged(NutCollectionEventArgs e)
+        public virtual void OnNutCollectionChanged(NutCollectionEventArgs e)
         {
-            NutsChanged?.Invoke(this, e);
+            NutCollectionChanged?.Invoke(this, e);
         }
 
         public virtual void OnNutChanged(NutEventArgs e)
@@ -97,12 +96,10 @@ namespace SquirrelFinder
 
         public void AddNut(INut nut)
         {
-            lock (_nuts)
-            {
-                _nuts.Add(nut);
-                nut.NutChanged += Nut_NutChanged;
-            }
-            OnNutsChanged(new NutCollectionEventArgs(_nuts.ToList()));
+            _nuts.Add(nut);
+            nut.NutChanged += Nut_NutChanged;
+
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
         private void Nut_NutChanged(object sender, NutEventArgs e)
@@ -112,11 +109,9 @@ namespace SquirrelFinder
 
         public void RemoveNut(INut nut)
         {
-            lock (_nuts)
-            {
-                _nuts.Remove(nut);
-            }
-            OnNutsChanged(new NutCollectionEventArgs(_nuts.ToList()));
+            _nuts.Remove(nut);
+
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
         public async Task PeekAll()

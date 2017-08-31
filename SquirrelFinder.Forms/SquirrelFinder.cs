@@ -27,7 +27,7 @@ namespace SquirrelFinder.Forms
         public SquirrelFinderSysTrayApp()
         {
             _nutMonitor = new NutMonitor();
-            _nutMonitor.NutsChanged += _nutMonitor_NutsChanged;
+            _nutMonitor.NutCollectionChanged += _nutMonitor_NutsChanged;
             _nutMonitor.NutChanged += _nutMonitor_NutChanged;
             ConfigureTrayMenu();
             ConfigureTrayIcon();

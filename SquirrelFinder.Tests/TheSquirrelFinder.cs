@@ -105,7 +105,7 @@ namespace SquirrelFinder.Tests
             public void CanRecycleAppPool()
             {
                 _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.Nuts.ToList().ForEach(n => {
                     if(n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
@@ -119,7 +119,7 @@ namespace SquirrelFinder.Tests
             public void CanStartAppPool()
             {
                 _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.Nuts.ToList().ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
@@ -133,7 +133,7 @@ namespace SquirrelFinder.Tests
             public void CanStopAppPool()
             {
                 _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.Nuts.ToList().ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;

@@ -24,7 +24,7 @@ namespace SquirrelFinder.Forms
         public Config(NutMonitor finder, NotifyIcon trayIcon)
         {
             _nutMonitor = finder == null ? new NutMonitor() : finder;
-            _nutMonitor.NutsChanged += _squirrelFinder_NutsChanged;
+            _nutMonitor.NutCollectionChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
             InitializeComponent();
             InitializeLocalSites();
