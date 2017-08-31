@@ -13,7 +13,7 @@ namespace SquirrelFinder.Nuts
         ServerManager _manager;
         Site _site;
 
-        public LocalNut(string url) : base(url)
+        public LocalNut(Uri url) : base(url)
         {
             _manager = new ServerManager();
             _setSiteFromUrl(Url);

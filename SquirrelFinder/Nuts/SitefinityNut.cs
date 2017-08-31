@@ -10,7 +10,7 @@ namespace SquirrelFinder.Nuts
 {
     public class SitefinityNut : Nut
     {
-        public SitefinityNut(string url) : base(url) { }
+        public SitefinityNut(Uri url) : base(url) { }
 
         public override HttpStatusCode Peek(int timeout = 5000)
         {

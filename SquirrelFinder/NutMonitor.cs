@@ -86,7 +86,6 @@ namespace SquirrelFinder
             lock (_nuts)
             {
                 _nuts.Add(site);
-                //site.OnNutActivity += Site_OnNutActivity;
             }
         }
 

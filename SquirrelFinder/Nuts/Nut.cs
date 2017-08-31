@@ -34,10 +34,9 @@ namespace SquirrelFinder.Nuts
 
         public bool HasShownMessage { get; set; }
 
-        public Nut(string url)
+        public Nut(Uri url)
         {
-            Uri u = new Uri(url);
-            Url = u;
+            Url = url;
         }
 
         public virtual void OnNutChanged(NutEventArgs e)
