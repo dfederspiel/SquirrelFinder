@@ -54,10 +54,16 @@ namespace SquirrelFinder.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -70,9 +76,9 @@ namespace SquirrelFinder.Forms
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.comboBoxLocalSites);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(13, 27);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 309);
+            this.groupBox1.Size = new System.Drawing.Size(366, 443);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Local Sites";
@@ -80,7 +86,7 @@ namespace SquirrelFinder.Forms
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 30);
+            this.label4.Location = new System.Drawing.Point(7, 30);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(352, 34);
             this.label4.TabIndex = 5;
@@ -90,9 +96,9 @@ namespace SquirrelFinder.Forms
             // buttonAddToWatch
             // 
             this.buttonAddToWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonAddToWatch.Location = new System.Drawing.Point(248, 260);
+            this.buttonAddToWatch.Location = new System.Drawing.Point(246, 260);
             this.buttonAddToWatch.Name = "buttonAddToWatch";
-            this.buttonAddToWatch.Size = new System.Drawing.Size(113, 37);
+            this.buttonAddToWatch.Size = new System.Drawing.Size(113, 29);
             this.buttonAddToWatch.TabIndex = 4;
             this.buttonAddToWatch.Text = "Add to Watch";
             this.buttonAddToWatch.UseVisualStyleBackColor = true;
@@ -102,7 +108,7 @@ namespace SquirrelFinder.Forms
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 129);
+            this.label2.Location = new System.Drawing.Point(4, 129);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 17);
             this.label2.TabIndex = 3;
@@ -113,7 +119,7 @@ namespace SquirrelFinder.Forms
             this.listBoxAvailableBindings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxAvailableBindings.FormattingEnabled = true;
             this.listBoxAvailableBindings.ItemHeight = 16;
-            this.listBoxAvailableBindings.Location = new System.Drawing.Point(9, 149);
+            this.listBoxAvailableBindings.Location = new System.Drawing.Point(7, 149);
             this.listBoxAvailableBindings.Name = "listBoxAvailableBindings";
             this.listBoxAvailableBindings.Size = new System.Drawing.Size(352, 100);
             this.listBoxAvailableBindings.TabIndex = 2;
@@ -122,7 +128,7 @@ namespace SquirrelFinder.Forms
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 64);
+            this.label1.Location = new System.Drawing.Point(4, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 1;
@@ -132,7 +138,7 @@ namespace SquirrelFinder.Forms
             // 
             this.comboBoxLocalSites.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxLocalSites.FormattingEnabled = true;
-            this.comboBoxLocalSites.Location = new System.Drawing.Point(9, 87);
+            this.comboBoxLocalSites.Location = new System.Drawing.Point(7, 87);
             this.comboBoxLocalSites.Name = "comboBoxLocalSites";
             this.comboBoxLocalSites.Size = new System.Drawing.Size(352, 24);
             this.comboBoxLocalSites.TabIndex = 0;
@@ -142,9 +148,9 @@ namespace SquirrelFinder.Forms
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.groupBox2.Controls.Add(this.flowLayoutPanel1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(386, 137);
+            this.groupBox2.Location = new System.Drawing.Point(400, 137);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(420, 372);
+            this.groupBox2.Size = new System.Drawing.Size(389, 372);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Watching";
@@ -152,9 +158,9 @@ namespace SquirrelFinder.Forms
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 39);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(6, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(408, 327);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(375, 338);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // textBoxPublicUrl
@@ -180,7 +186,7 @@ namespace SquirrelFinder.Forms
             this.buttonAddPublicSite.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAddPublicSite.Location = new System.Drawing.Point(248, 124);
             this.buttonAddPublicSite.Name = "buttonAddPublicSite";
-            this.buttonAddPublicSite.Size = new System.Drawing.Size(113, 37);
+            this.buttonAddPublicSite.Size = new System.Drawing.Size(113, 31);
             this.buttonAddPublicSite.TabIndex = 4;
             this.buttonAddPublicSite.Text = "Add to Watch";
             this.buttonAddPublicSite.UseVisualStyleBackColor = true;
@@ -192,7 +198,7 @@ namespace SquirrelFinder.Forms
             this.fileToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(818, 24);
+            this.menuStrip.Size = new System.Drawing.Size(798, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -238,9 +244,9 @@ namespace SquirrelFinder.Forms
             this.groupBox3.Controls.Add(this.buttonAddPublicSite);
             this.groupBox3.Controls.Add(this.textBoxPublicUrl);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(13, 342);
+            this.groupBox3.Location = new System.Drawing.Point(6, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(367, 167);
+            this.groupBox3.Size = new System.Drawing.Size(366, 443);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Public Sites";
@@ -259,7 +265,7 @@ namespace SquirrelFinder.Forms
             // 
             this.panel1.BackgroundImage = global::SquirrelFinder.Forms.Resources.Squirrel;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Location = new System.Drawing.Point(698, 28);
+            this.panel1.Location = new System.Drawing.Point(681, 28);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(108, 100);
             this.panel1.TabIndex = 7;
@@ -283,22 +289,53 @@ namespace SquirrelFinder.Forms
             this.label6.TabIndex = 9;
             this.label6.Text = "Keep track of your nuts, without even looking.";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(8, 28);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(386, 481);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(378, 455);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Local IIS Sites";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox3);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(378, 455);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Public Sites";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(818, 521);
+            this.ClientSize = new System.Drawing.Size(798, 521);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.MaximumSize = new System.Drawing.Size(834, 560);
-            this.MinimumSize = new System.Drawing.Size(834, 560);
+            this.MaximumSize = new System.Drawing.Size(814, 560);
+            this.MinimumSize = new System.Drawing.Size(814, 560);
             this.Name = "Config";
             this.Text = "Squirrel Finder Settings";
             this.groupBox1.ResumeLayout(false);
@@ -308,6 +345,9 @@ namespace SquirrelFinder.Forms
             this.menuStrip.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -338,5 +378,8 @@ namespace SquirrelFinder.Forms
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\NotificationManager.cs" />
     <Compile Include="Nuts\Interfaces\ILocalNut.cs" />
     <Compile Include="Nuts\Interfaces\INut.cs" />
     <Compile Include="Nuts\LocalNut.cs" />

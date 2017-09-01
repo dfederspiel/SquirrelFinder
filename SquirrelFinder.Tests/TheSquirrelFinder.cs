@@ -172,9 +172,15 @@ namespace SquirrelFinder.Tests
             }
 
             [TestMethod]
-            public void CanGetBalloonTipInfo()
+            public void CanGetANotificationTitle()
             {
-                _nut.GetBalloonTipInfo();
+
+            }
+
+            [TestMethod]
+            public void CanGetANotificationText()
+            {
+
             }
         }
 

@@ -37,11 +37,11 @@ namespace SquirrelFinder
         static string _flatLine = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\flatline.wav";
 
         private List<INut> _nuts;
-        public IQueryable<INut> Nuts { get { return _nuts.AsQueryable(); } set { _nuts = value.ToList(); } }
+        public List<INut> Nuts { get { return _nuts; } set { _nuts = value; } }
 
         public NutMonitor()
         {
-            _nuts = new List<INut>();
+            Nuts = new List<INut>();
         }
 
         public virtual void OnNutCollectionChanged(NutCollectionEventArgs e)
@@ -96,10 +96,10 @@ namespace SquirrelFinder
 
         public void AddNut(INut nut)
         {
-            _nuts.Add(nut);
+            Nuts.Add(nut);
             nut.NutChanged += Nut_NutChanged;
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
         }
 
         private void Nut_NutChanged(object sender, NutEventArgs e)
@@ -109,14 +109,14 @@ namespace SquirrelFinder
 
         public void RemoveNut(INut nut)
         {
-            _nuts.Remove(nut);
+            Nuts.Remove(nut);
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
         }
 
         public async Task PeekAll()
         {
-            foreach (var nut in _nuts)
+            foreach (var nut in Nuts)
             {
                 await Task.Run(() =>
                 {

@@ -35,11 +35,11 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return this.State.ToString();
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
         public override string GetBalloonTipTitle()
         {
-            return "Local Nut Activity";
+            return $"Local Nut Activity ({Title})";
         }
 
         public virtual IQueryable<string> GetSiteBindingUrls()

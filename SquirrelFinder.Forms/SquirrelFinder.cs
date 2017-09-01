@@ -1,4 +1,5 @@
-﻿using SquirrelFinder.Nuts;
+﻿using SquirrelFinder.Notifications;
+using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -66,9 +67,13 @@ namespace SquirrelFinder.Forms
 
             if (!nut.HasShownMessage)
             {
-                _trayIcon.BalloonTipTitle = nut.GetBalloonTipTitle();
-                _trayIcon.BalloonTipText = nut.GetBalloonTipInfo();
-                _trayIcon.ShowBalloonTip(5000);
+                var title = nut.GetBalloonTipTitle();
+                var message = nut.GetBalloonTipInfo();
+                _trayIcon.BalloonTipTitle = title;
+                _trayIcon.BalloonTipText = message;
+                NotificationManager.Add(nut, title, message);
+                _trayIcon.ShowBalloonTip(nut.State != NutState.Found ? 2000 : 10000);
+
                 _nutMonitor.PlayTone(tone);
                 nut.HasShownMessage = true;
             }
@@ -123,8 +128,29 @@ namespace SquirrelFinder.Forms
 
         private void _trayIcon_BalloonTipClicked(object sender, EventArgs e)
         {
-            var url = _nutMonitor.Nuts.Select(n => n.Url.ToString()).First();
-            Process.Start("chrome.exe", url);
+            var icon = (NotifyIcon)sender;
+            var notification = NotificationManager.GetNotificationForMessage(icon.BalloonTipText);
+            switch (notification.State)
+            {
+                case NutState.NotChecked:
+                    break;
+                case NutState.Found:
+                    Process.Start("chrome.exe", notification.Url);
+                    break;
+                case NutState.Searching:
+                    
+                    break;
+                case NutState.Lost:
+                    if (_configForm == null || _configForm.IsDisposed)
+                    {
+                        _configForm = new Config(_nutMonitor, _trayIcon);
+                        _configForm.MinimizeBox = false;
+                        _configForm.MaximizeBox = false;
+                    }
+
+                    _configForm.Show();
+                    break;
+            }
         }
         #endregion
 
