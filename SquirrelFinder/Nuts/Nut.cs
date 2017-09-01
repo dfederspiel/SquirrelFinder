@@ -1,4 +1,6 @@
 ﻿using Microsoft.Web.Administration;
+using Newtonsoft.Json;
+using SquirrelFinder.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,15 @@ namespace SquirrelFinder.Nuts
         }
     }
 
+    public class NutCollectionEventArgs : EventArgs
+    {
+        public List<INut> Nuts { get; set; }
+        public NutCollectionEventArgs(List<INut> nuts)
+        {
+            Nuts = nuts;
+        }
+    }
+
     public class Nut : INut
     {
         public Uri Url { get; set; }
@@ -34,8 +45,13 @@ namespace SquirrelFinder.Nuts
 
         public bool HasShownMessage { get; set; }
 
+        public string Title { get; set; }
+
+        public Nut() { }
+
         public Nut(Uri url)
         {
+            Title = url.Host;
             Url = url;
         }
 
@@ -75,19 +91,14 @@ namespace SquirrelFinder.Nuts
             return HttpStatusCode.NotFound;
         }
 
-        public virtual string GetInfo()
-        {
-            return Url.ToString();
-        }
-
         public virtual string GetBalloonTipInfo()
         {
-            return "Regular Nut Activity";
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
 
         public virtual string GetBalloonTipTitle()
         {
-            return "Regular Nut Activity";
+            return $"Public Nut Activity ({Title})";
         }
     }
 

@@ -13,13 +13,13 @@ namespace SquirrelFinder.Tests
     [TestClass]
     public class TheSquirrelFinder
     {
-        static NutMonitor _monitor;
+        static NutManager _monitor;
         static INut _nut;
 
         [TestInitialize]
         public void Setup()
         {
-            _monitor = new NutMonitor();
+            _monitor = new NutManager();
             _nut = new Nut(new Uri("http://localhost"));
         }
 
@@ -38,7 +38,7 @@ namespace SquirrelFinder.Tests
         [TestMethod]
         public void CanGetSiteBindingUrls()
         {
-            _monitor = new NutMonitor();
+            _monitor = new NutManager();
             Assert.IsInstanceOfType(_monitor.GetSiteBindings("Default Web Site"), typeof(IEnumerable<string>));
             foreach (var url in _monitor.GetSiteBindings("Default Web Site"))
                 Console.WriteLine(url);
@@ -96,7 +96,7 @@ namespace SquirrelFinder.Tests
             [TestInitialize]
             public void Setup()
             {
-                _monitor = new NutMonitor();
+                _monitor = new NutManager();
                 _monitor.AddNut(new LocalNut(new Uri("http://localhost")));
             }
 
@@ -104,8 +104,8 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void CanRecycleAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.AddNut(new LocalSitefinityNut(new Uri("http://basitefinityoob.local")));
+                _monitor.Nuts.ToList().ForEach(n => {
                     if(n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
@@ -118,8 +118,8 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void CanStartAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.AddNut(new LocalSitefinityNut(new Uri("http://basitefinityoob.local")));
+                _monitor.Nuts.ToList().ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
@@ -132,8 +132,8 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void CanStopAppPool()
             {
-                _monitor.AddNut(new SitefinityLocalNut(new Uri("http://basitefinityoob.local")));
-                _monitor._nuts.ForEach(n => {
+                _monitor.AddNut(new LocalSitefinityNut(new Uri("http://basitefinityoob.local")));
+                _monitor.Nuts.ToList().ForEach(n => {
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
@@ -145,13 +145,13 @@ namespace SquirrelFinder.Tests
             [TestMethod]
             public void GivenASiteUrlReturnsTheSitePath()
             {
-                Assert.AreEqual(@"%SystemDrive%\inetpub\wwwroot", _monitor.GetSitePathFromUrl("http://localhost"));
+                Assert.AreEqual(@"%SystemDrive%\inetpub\wwwroot", NutHelper.GetDirectoryFromUrl("http://localhost"));
             }
 
             [TestMethod]
             public void GivenAnEmptyStringReturnsAnEmptyString()
             {
-                Assert.AreEqual(@"", _monitor.GetSitePathFromUrl(""));
+                Assert.AreEqual(@"", NutHelper.GetDirectoryFromUrl(""));
             }
         }
 
@@ -161,7 +161,7 @@ namespace SquirrelFinder.Tests
             [TestInitialize]
             public void Setup()
             {
-                _monitor = new NutMonitor();
+                _monitor = new NutManager();
                 _nut = new Nut(new Uri("http://google.com"));
             }
 
@@ -172,20 +172,26 @@ namespace SquirrelFinder.Tests
             }
 
             [TestMethod]
-            public void CanGetBalloonTipInfo()
+            public void CanGetANotificationTitle()
             {
-                _nut.GetBalloonTipInfo();
+
+            }
+
+            [TestMethod]
+            public void CanGetANotificationText()
+            {
+
             }
         }
 
         [TestClass]
         public class InitializedWithASitefinityNut
         {
-            static NutMonitor _finder;
+            static NutManager _finder;
             [TestInitialize]
             public void Setup()
             {
-                _finder = new NutMonitor();
+                _finder = new NutManager();
                 _finder.AddNut(new SitefinityNut(new Uri("http://basitefinityoob.local")));
             }
         }
@@ -193,20 +199,22 @@ namespace SquirrelFinder.Tests
         [TestClass]
         public class InitializedWithASitefinityLocalNut
         {
-            static NutMonitor _nutWatcher;
+            static NutManager _nutWatcher;
             [TestInitialize]
             public void Setup()
             {
-                _nutWatcher = new NutMonitor();
-                _nutWatcher.AddNut(new SitefinityLocalNut(new Uri("http://basitefinity.local")));
+                _nutWatcher = new NutManager();
+                _nutWatcher.AddNut(new LocalSitefinityNut(new Uri("http://basitefinity.local")));
             }
 
+            [Ignore]
             [TestMethod]
             public void CanWatchLogFiles()
             {
 
             }
 
+            [Ignore]
             [TestMethod]
             public void CanWatchBinDirectory()
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using Newtonsoft.Json;
 using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,10 @@ namespace SquirrelFinder.Nuts
         ServerManager _manager;
         Site _site;
 
+        public string Path { get { return NutHelper.GetDirectoryFromUrl(Url.ToString()); } }
+        
+        public LocalNut() { }
+
         public LocalNut(Uri url) : base(url)
         {
             _manager = new ServerManager();
@@ -21,9 +26,9 @@ namespace SquirrelFinder.Nuts
 
         private void _setSiteFromUrl(Uri url)
         {
-            foreach(var site in _manager.Sites)
+            foreach (var site in _manager.Sites)
             {
-                foreach(var binding in site.Bindings)
+                foreach (var binding in site.Bindings)
                 {
                     if (binding.Host == (binding.Host == "" ? "" : url.Host) && binding.Protocol == url.Scheme)
                     {
@@ -35,11 +40,11 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return "Local Nut Activity";
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
         public override string GetBalloonTipTitle()
         {
-            return "Local Nut Activity";
+            return $"Local Nut Activity ({Title})";
         }
 
         public virtual IQueryable<string> GetSiteBindingUrls()
@@ -61,8 +66,9 @@ namespace SquirrelFinder.Nuts
 
         public void RecycleSite()
         {
-            if(_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
+            if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
                 _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Recycle();
+
         }
 
         public void StopSite()

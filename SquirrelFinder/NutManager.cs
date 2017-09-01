@@ -20,10 +20,13 @@ namespace SquirrelFinder
         Squirrel
     }
 
-    public class NutMonitor
+    public class NutManager
     {
         static SoundPlayer _player = new SoundPlayer();
         SquirrelFinderSound _currentSound = SquirrelFinderSound.None;
+
+        public event EventHandler<NutCollectionEventArgs> NutCollectionChanged;
+        public event EventHandler<NutEventArgs> NutChanged;
 
         FileSystemWatcher watcher = new FileSystemWatcher();
 
@@ -33,12 +36,22 @@ namespace SquirrelFinder
         static string _gearsSound = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\gears.wav";
         static string _flatLine = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\flatline.wav";
 
-        public List<INut> _nuts;
-        public IQueryable<INut> Nuts { get { return _nuts.AsQueryable(); } set { _nuts = value.ToList(); } }
+        private List<INut> _nuts;
+        public List<INut> Nuts { get { return _nuts; } set { _nuts = value; } }
 
-        public NutMonitor()
+        public NutManager()
         {
-            _nuts = new List<INut>();
+            Nuts = new List<INut>();
+        }
+
+        public virtual void OnNutCollectionChanged(NutCollectionEventArgs e)
+        {
+            NutCollectionChanged?.Invoke(this, e);
+        }
+
+        public virtual void OnNutChanged(NutEventArgs e)
+        {
+            NutChanged?.Invoke(this, e);
         }
 
         #region IISSiteTools
@@ -50,56 +63,46 @@ namespace SquirrelFinder
                 yield return site.Name;
         }
 
-        public string GetSitePathFromUrl(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return string.Empty;
+        //public string GetSitePathFromUrl(string url)
+        //{
+        //    if (string.IsNullOrEmpty(url))
+        //        return string.Empty;
 
-            var u = new Uri(url);
-            var path = "";
-            var manager = new ServerManager();
-
-            foreach (var site in manager.Sites)
-            {
-                foreach (var binding in site.Bindings)
-                {
-                    if (binding.Host == (binding.Host == "" ? "" : u.Host) && binding.Protocol == u.Scheme)
-                    {
-                        path = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
-                    }
-                }
-            }
-            return path;
-        }
+        //    return NutHelper.GetDirectoryFromUrl(url);
+        //}
 
         public IEnumerable<string> GetSiteBindings(string siteName)
         {
             var manager = new ServerManager();
             var site = manager.Sites.Where(s => s.Name == siteName).FirstOrDefault();
-            return site.Bindings.Select(b => b.Protocol + "://" + b.Host);
+            return site.Bindings.Select(b => b.Protocol + "://" + (b.Host == string.Empty ? "localhost" : b.Host));
         }
 
         #endregion
 
-        public void AddNut(INut site)
+        public void AddNut(INut nut)
         {
-            lock (_nuts)
-            {
-                _nuts.Add(site);
-            }
+            Nuts.Add(nut);
+            nut.NutChanged += Nut_NutChanged;
+
+            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
         }
 
-        public void RemoveNut(INut site)
+        private void Nut_NutChanged(object sender, NutEventArgs e)
         {
-            lock (_nuts)
-            {
-                _nuts.Remove(site);
-            }
+            OnNutChanged(e);
+        }
+
+        public void RemoveNut(INut nut)
+        {
+            Nuts.Remove(nut);
+
+            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
         }
 
         public async Task PeekAll()
         {
-            foreach (var nut in _nuts)
+            foreach (var nut in Nuts)
             {
                 await Task.Run(() =>
                 {

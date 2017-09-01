@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace SquirrelFinder.Nuts
 {
     public class SitefinityNut : Nut
     {
+        public SitefinityNut() { }
+
         public SitefinityNut(Uri url) : base(url) { }
 
         public override HttpStatusCode Peek(int timeout = 5000)
@@ -49,12 +52,12 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return "Sitefinity Nut Activity";
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
 
         public override string GetBalloonTipTitle()
         {
-            return "Sitefinity Nut Activity";
+            return $"Sitefinity Nut Activity ({Title})";
         }
     }
 }
