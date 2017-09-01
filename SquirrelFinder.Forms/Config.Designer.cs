@@ -106,7 +106,7 @@ namespace SquirrelFinder.Forms
             this.buttonAddToWatch.TabIndex = 4;
             this.buttonAddToWatch.Text = "Add to Watch";
             this.buttonAddToWatch.UseVisualStyleBackColor = true;
-            this.buttonAddToWatch.Click += new System.EventHandler(this.buttonAddToWatch_Click);
+            this.buttonAddToWatch.Click += new System.EventHandler(this.ButtonAddToWatch_Click);
             // 
             // label2
             // 
@@ -194,7 +194,7 @@ namespace SquirrelFinder.Forms
             this.buttonAddPublicSite.TabIndex = 4;
             this.buttonAddPublicSite.Text = "Add to Watch";
             this.buttonAddPublicSite.UseVisualStyleBackColor = true;
-            this.buttonAddPublicSite.Click += new System.EventHandler(this.buttonAddPublicSite_Click);
+            this.buttonAddPublicSite.Click += new System.EventHandler(this.ButtonAddPublicSite_Click);
             // 
             // menuStrip
             // 
