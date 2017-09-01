@@ -57,7 +57,8 @@ namespace SquirrelFinder.Forms
 
         private void buttonAddPublicSite_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxPublicUrl.Text) || string.IsNullOrEmpty(comboBoxProtocol.SelectedItem.ToString())) return;
+            if (string.IsNullOrEmpty(textBoxPublicUrl.Text) || 
+                (comboBoxProtocol.SelectedItem != null && string.IsNullOrEmpty(comboBoxProtocol.SelectedItem.ToString()))) return;
 
             try
             {
