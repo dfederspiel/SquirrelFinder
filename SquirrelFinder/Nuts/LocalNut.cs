@@ -15,7 +15,7 @@ namespace SquirrelFinder.Nuts
         Site _site;
 
         public string Path { get { return NutHelper.GetDirectoryFromUrl(Url.ToString()); } }
-        
+
         public LocalNut() { }
 
         public LocalNut(Uri url) : base(url)
@@ -66,22 +66,42 @@ namespace SquirrelFinder.Nuts
 
         public void RecycleSite()
         {
-            if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
-                _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Recycle();
+            try
+            {
+                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
+                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Recycle();
+            }
+            catch
+            {
 
+            }
         }
 
         public void StopSite()
         {
-            if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
-                _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Stop();
+            try
+            {
+                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
+                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Stop();
+            }
+            catch
+            {
+
+            }
         }
 
         public void StartSite()
         {
-            if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Started &&
+            try
+            {
+                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Started &&
                 _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Starting)
-                _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Start();
+                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Start();
+            }
+            catch
+            {
+
+            }
         }
     }
 }
