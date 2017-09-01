@@ -89,5 +89,10 @@ namespace SquirrelFinder.Forms
                 _nutMonitor.AddNut(localNut);
             }
         }
+
+        private void Config_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
