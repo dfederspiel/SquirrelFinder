@@ -15,14 +15,14 @@ namespace SquirrelFinder.Forms.UserControls
     public partial class NutInfo : UserControl
     {
         private INut n2;
-        NutMonitor monitor;
+        NutManager monitor;
 
         public NutInfo()
         {
             InitializeComponent();
         }
 
-        public NutInfo(INut n2, NutMonitor monitor)
+        public NutInfo(INut n2, NutManager monitor)
         {
             this.n2 = n2;
             this.n2.NutChanged += N2_NutChanged;
@@ -33,22 +33,24 @@ namespace SquirrelFinder.Forms.UserControls
 
             buttonRecycle.Click += ButtonRecycle_Click;
             buttonRemove.Click += ButtonRemove_Click;
-            UpdateColor(n2.State);
+            UpdateControl(n2.State);
         }
 
-        private void UpdateColor(NutState state)
+        private void UpdateControl(NutState state)
         {
             if (state == NutState.Lost)
-                this.BackColor = Color.Red;
+                //buttonRecycle.Enabled = false;
+                panelStatusLight.BackColor = Color.Red;
             if (state == NutState.Found)
-                BackColor = Color.Green;
+                //buttonRecycle.Enabled = true;
+            panelStatusLight.BackColor = Color.Green;
             if (state == NutState.Searching)
-                BackColor = Color.Yellow;
+                panelStatusLight.BackColor = Color.Yellow;
         }
 
         private void N2_NutChanged(object sender, NutEventArgs e)
         {
-            UpdateColor(n2.State);
+            UpdateControl(n2.State);
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
