@@ -43,8 +43,5 @@ namespace SquirrelFinder
         {
             var json = JsonConvert.SerializeObject(nuts);
         }
-
-
-
     }
 }

@@ -50,6 +50,7 @@ namespace SquirrelFinder.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBoxIsSitefinity = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxProtocol = new System.Windows.Forms.ComboBox();
@@ -60,7 +61,6 @@ namespace SquirrelFinder.Forms
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkBoxIsSitefinity = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -259,6 +259,17 @@ namespace SquirrelFinder.Forms
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Public Sites";
             // 
+            // checkBoxIsSitefinity
+            // 
+            this.checkBoxIsSitefinity.AutoSize = true;
+            this.checkBoxIsSitefinity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxIsSitefinity.Location = new System.Drawing.Point(97, 152);
+            this.checkBoxIsSitefinity.Name = "checkBoxIsSitefinity";
+            this.checkBoxIsSitefinity.Size = new System.Drawing.Size(94, 21);
+            this.checkBoxIsSitefinity.TabIndex = 10;
+            this.checkBoxIsSitefinity.Text = "Is Sitefinity";
+            this.checkBoxIsSitefinity.UseVisualStyleBackColor = true;
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -360,17 +371,6 @@ namespace SquirrelFinder.Forms
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Public Sites";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxIsSitefinity
-            // 
-            this.checkBoxIsSitefinity.AutoSize = true;
-            this.checkBoxIsSitefinity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxIsSitefinity.Location = new System.Drawing.Point(97, 152);
-            this.checkBoxIsSitefinity.Name = "checkBoxIsSitefinity";
-            this.checkBoxIsSitefinity.Size = new System.Drawing.Size(94, 21);
-            this.checkBoxIsSitefinity.TabIndex = 10;
-            this.checkBoxIsSitefinity.Text = "Is Sitefinity";
-            this.checkBoxIsSitefinity.UseVisualStyleBackColor = true;
             // 
             // Config
             // 

@@ -27,23 +27,33 @@ namespace SquirrelFinder.Forms.UserControls
             this.n2 = n2;
             this.n2.NutChanged += N2_NutChanged;
             this.monitor = monitor;
-            InitializeComponent();
 
+            InitializeComponent();
             linkLabelUrl.Text = n2.Url.ToString();
+
+            if (n2.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
+            {
+                linkLabelAppDirectory.Click += LinkLabelAppDirectory_Click; ;
+            }
 
             buttonRecycle.Click += ButtonRecycle_Click;
             buttonRemove.Click += ButtonRemove_Click;
+
             UpdateControl(n2.State);
+        }
+
+        private void LinkLabelAppDirectory_Click(object sender, EventArgs e)
+        {
+            var localNutType = (ILocalNut)n2;
+            Process.Start("explorer.exe", localNutType.Path);
         }
 
         private void UpdateControl(NutState state)
         {
             if (state == NutState.Lost)
-                //buttonRecycle.Enabled = false;
                 panelStatusLight.BackColor = Color.Red;
             if (state == NutState.Found)
-                //buttonRecycle.Enabled = true;
-            panelStatusLight.BackColor = Color.Green;
+                panelStatusLight.BackColor = Color.Green;
             if (state == NutState.Searching)
                 panelStatusLight.BackColor = Color.Yellow;
         }
@@ -60,7 +70,7 @@ namespace SquirrelFinder.Forms.UserControls
 
         private void ButtonRecycle_Click(object sender, EventArgs e)
         {
-            if(n2.GetType().GetInterfaces().Where(i => i.Name == "ILocalNut").Count() > 0)
+            if (n2.GetType().GetInterfaces().Where(i => i.Name == "ILocalNut").Count() > 0)
             {
                 var n = (ILocalNut)n2;
                 n.RecycleSite();
