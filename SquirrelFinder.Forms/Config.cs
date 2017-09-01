@@ -17,12 +17,12 @@ namespace SquirrelFinder.Forms
     public partial class Config : Form
     {
 
-        static NutMonitor _nutMonitor;
+        static NutManager _nutMonitor;
         static NotifyIcon _trayIcon;
 
-        public Config(NutMonitor nutMonitor, NotifyIcon trayIcon)
+        public Config(NutManager nutMonitor, NotifyIcon trayIcon)
         {
-            _nutMonitor = nutMonitor == null ? new NutMonitor() : nutMonitor;
+            _nutMonitor = nutMonitor == null ? new NutManager() : nutMonitor;
             _nutMonitor.NutCollectionChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
             InitializeComponent();
@@ -57,11 +57,11 @@ namespace SquirrelFinder.Forms
 
         private void buttonAddPublicSite_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxPublicUrl.Text)) return;
+            if (string.IsNullOrEmpty(textBoxPublicUrl.Text) || string.IsNullOrEmpty(comboBoxProtocol.SelectedItem.ToString())) return;
 
             try
             {
-                var uri = new Uri(textBoxPublicUrl.Text);
+                var uri = new Uri(comboBoxProtocol.SelectedItem.ToString() + "://" + textBoxPublicUrl.Text);
                 var nut = new Nut(uri);
                 _nutMonitor.AddNut(nut);
 
@@ -77,9 +77,9 @@ namespace SquirrelFinder.Forms
         {
             if (listBoxAvailableBindings.SelectedItem == null) return;
             var url = new Uri(listBoxAvailableBindings.SelectedItem.ToString());
-            if (Directory.Exists(_nutMonitor.GetSitePathFromUrl(url.ToString()) + "/App_Data/Sitefinity"))
+            if (Directory.Exists(NutHelper.GetDirectoryFromUrl(url.ToString()) + "/App_Data/Sitefinity"))
             {
-                var sitefinityLocalNut = new SitefinityLocalNut(url);
+                var sitefinityLocalNut = new LocalSitefinityNut(url);
                 _nutMonitor.AddNut(sitefinityLocalNut);
             }
             else

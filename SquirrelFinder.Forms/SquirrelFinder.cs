@@ -13,7 +13,7 @@ namespace SquirrelFinder.Forms
 {
     public class SquirrelFinderSysTrayApp : Form
     {
-        static NutMonitor _nutMonitor;
+        static NutManager _nutMonitor;
         static System.Windows.Forms.Timer _timer;
         static NotifyIcon _trayIcon;
         static ContextMenuStrip _trayMenu;
@@ -27,7 +27,7 @@ namespace SquirrelFinder.Forms
 
         public SquirrelFinderSysTrayApp()
         {
-            _nutMonitor = new NutMonitor();
+            _nutMonitor = new NutManager();
             _nutMonitor.NutCollectionChanged += _nutMonitor_NutsChanged;
             _nutMonitor.NutChanged += _nutMonitor_NutChanged;
             ConfigureTrayMenu();
