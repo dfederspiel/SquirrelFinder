@@ -50,6 +50,9 @@ namespace SquirrelFinder.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboBoxProtocol = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,9 +60,6 @@ namespace SquirrelFinder.Forms
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.comboBoxProtocol = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -257,6 +257,38 @@ namespace SquirrelFinder.Forms
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Public Sites";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(94, 92);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Domain";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(4, 92);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Protocol";
+            // 
+            // comboBoxProtocol
+            // 
+            this.comboBoxProtocol.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxProtocol.FormattingEnabled = true;
+            this.comboBoxProtocol.Items.AddRange(new object[] {
+            "http",
+            "https"});
+            this.comboBoxProtocol.Location = new System.Drawing.Point(7, 110);
+            this.comboBoxProtocol.Name = "comboBoxProtocol";
+            this.comboBoxProtocol.Size = new System.Drawing.Size(84, 24);
+            this.comboBoxProtocol.TabIndex = 7;
+            // 
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -327,38 +359,6 @@ namespace SquirrelFinder.Forms
             this.tabPage2.Text = "Public Sites";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // comboBoxProtocol
-            // 
-            this.comboBoxProtocol.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxProtocol.FormattingEnabled = true;
-            this.comboBoxProtocol.Items.AddRange(new object[] {
-            "http",
-            "https"});
-            this.comboBoxProtocol.Location = new System.Drawing.Point(7, 110);
-            this.comboBoxProtocol.Name = "comboBoxProtocol";
-            this.comboBoxProtocol.Size = new System.Drawing.Size(84, 24);
-            this.comboBoxProtocol.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(4, 92);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Protocol";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(94, 92);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Domain";
-            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -376,6 +376,7 @@ namespace SquirrelFinder.Forms
             this.MinimumSize = new System.Drawing.Size(814, 560);
             this.Name = "Config";
             this.Text = "Squirrel Finder Settings";
+            this.Load += new System.EventHandler(this.Config_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
