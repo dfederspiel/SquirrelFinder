@@ -8,6 +8,7 @@ namespace SquirrelFinder.Nuts
 {
     public interface ILocalNut : INut
     {
+        string Path { get; }
         void RecycleSite();
         void StopSite();
         void StartSite();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using Newtonsoft.Json;
 using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ namespace SquirrelFinder.Nuts
     {
         ServerManager _manager;
         Site _site;
+
+        public string Path { get { return NutHelper.GetDirectoryFromUrl(Url.ToString()); } }
+        
+        public LocalNut() { }
 
         public LocalNut(Uri url) : base(url)
         {

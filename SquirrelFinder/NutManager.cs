@@ -20,7 +20,7 @@ namespace SquirrelFinder
         Squirrel
     }
 
-    public class NutMonitor
+    public class NutManager
     {
         static SoundPlayer _player = new SoundPlayer();
         SquirrelFinderSound _currentSound = SquirrelFinderSound.None;
@@ -39,7 +39,7 @@ namespace SquirrelFinder
         private List<INut> _nuts;
         public List<INut> Nuts { get { return _nuts; } set { _nuts = value; } }
 
-        public NutMonitor()
+        public NutManager()
         {
             Nuts = new List<INut>();
         }
@@ -63,27 +63,13 @@ namespace SquirrelFinder
                 yield return site.Name;
         }
 
-        public string GetSitePathFromUrl(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return string.Empty;
+        //public string GetSitePathFromUrl(string url)
+        //{
+        //    if (string.IsNullOrEmpty(url))
+        //        return string.Empty;
 
-            var u = new Uri(url);
-            var path = "";
-            var manager = new ServerManager();
-
-            foreach (var site in manager.Sites)
-            {
-                foreach (var binding in site.Bindings)
-                {
-                    if (binding.Host == (binding.Host == "" ? "" : u.Host) && binding.Protocol == u.Scheme)
-                    {
-                        path = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
-                    }
-                }
-            }
-            return path;
-        }
+        //    return NutHelper.GetDirectoryFromUrl(url);
+        //}
 
         public IEnumerable<string> GetSiteBindings(string siteName)
         {

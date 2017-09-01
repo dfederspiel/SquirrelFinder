@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace SquirrelFinder.Nuts
 {
     public class SitefinityNut : Nut
     {
+        public SitefinityNut() { }
+
         public SitefinityNut(Uri url) : base(url) { }
 
         public override HttpStatusCode Peek(int timeout = 5000)

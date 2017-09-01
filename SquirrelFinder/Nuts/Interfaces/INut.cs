@@ -6,9 +6,10 @@ namespace SquirrelFinder.Nuts
 {
     public interface INut
     {
+        
         void OnNutChanged(NutEventArgs e);
         event EventHandler<NutEventArgs> NutChanged;
-
+        
         string Title { get; set; }
         Uri Url { get; set; }
         NutState State { get; set; }

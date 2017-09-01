@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using Newtonsoft.Json;
 using SquirrelFinder.Notifications;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,8 @@ namespace SquirrelFinder.Nuts
         public bool HasShownMessage { get; set; }
 
         public string Title { get; set; }
+
+        public Nut() { }
 
         public Nut(Uri url)
         {

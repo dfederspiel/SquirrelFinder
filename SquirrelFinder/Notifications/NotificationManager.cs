@@ -5,12 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using SquirrelFinder.Nuts;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace SquirrelFinder.Notifications
 {
     public class NotificationManager
     {
         public static Dictionary<Guid, Notification> Notifications = new Dictionary<Guid, Notification>();
+
+        public NotificationManager(NotifyIcon icon)
+        {
+            // For eventual queue of messages
+        }
 
         public static void Add(INut nut, string title, string message)
         {
