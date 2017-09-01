@@ -1,16 +1,9 @@
 ﻿using SquirrelFinder.Forms.UserControls;
 using SquirrelFinder.Nuts;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace SquirrelFinder.Forms
 {
@@ -22,7 +15,7 @@ namespace SquirrelFinder.Forms
 
         public Config(NutManager nutMonitor, NotifyIcon trayIcon)
         {
-            _nutMonitor = nutMonitor == null ? new NutManager() : nutMonitor;
+            _nutMonitor = nutMonitor ?? new NutManager();
             _nutMonitor.NutCollectionChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
             InitializeComponent();
@@ -55,7 +48,7 @@ namespace SquirrelFinder.Forms
             listBoxAvailableBindings.Items.AddRange(_nutMonitor.GetSiteBindings(comboBoxLocalSites.SelectedItem.ToString()).ToArray());
         }
 
-        private void buttonAddPublicSite_Click(object sender, EventArgs e)
+        private void ButtonAddPublicSite_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxPublicUrl.Text) || 
                 (comboBoxProtocol.SelectedItem != null && string.IsNullOrEmpty(comboBoxProtocol.SelectedItem.ToString()))) return;
@@ -74,7 +67,7 @@ namespace SquirrelFinder.Forms
             }
         }
 
-        private void buttonAddToWatch_Click(object sender, EventArgs e)
+        private void ButtonAddToWatch_Click(object sender, EventArgs e)
         {
             if (listBoxAvailableBindings.SelectedItem == null) return;
             var url = new Uri(listBoxAvailableBindings.SelectedItem.ToString());
