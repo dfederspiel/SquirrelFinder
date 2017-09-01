@@ -21,23 +21,18 @@ namespace SquirrelFinder.Forms
         static NotifyIcon _trayIcon;
         static Timer _timer;
 
-        public Config(NutMonitor finder, NotifyIcon trayIcon)
+        public Config(NutMonitor nutMonitor, NotifyIcon trayIcon)
         {
-            _nutMonitor = finder == null ? new NutMonitor() : finder;
+            _nutMonitor = nutMonitor == null ? new NutMonitor() : nutMonitor;
             _nutMonitor.NutCollectionChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
             InitializeComponent();
             InitializeLocalSites();
 
-            _timer = new Timer();
-            _timer.Interval = 500;
-            _timer.Tick += _timer_Tick;
-            _timer.Start();
-        }
-
-        private void _timer_Tick(object sender, EventArgs e)
-        {
-            
+            foreach (var nut in _nutMonitor.Nuts)
+            {
+                flowLayoutPanel1.Controls.Add(new NutInfo(nut, _nutMonitor));
+            }
         }
 
         private void _squirrelFinder_NutsChanged(object sender, NutCollectionEventArgs e)
@@ -87,13 +82,11 @@ namespace SquirrelFinder.Forms
             {
                 var sitefinityLocalNut = new SitefinityLocalNut(url);
                 _nutMonitor.AddNut(sitefinityLocalNut);
-                //sitefinityLocalNut.OnNutChanged(new NutEventArgs(sitefinityLocalNut));
             }
             else
             {
                 var localNut = new LocalNut(url);
                 _nutMonitor.AddNut(localNut);
-                //localNut.OnNutChanged(new NutEventArgs(localNut));
             }
         }
     }

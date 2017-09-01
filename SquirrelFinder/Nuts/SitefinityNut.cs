@@ -49,12 +49,12 @@ namespace SquirrelFinder.Nuts
 
         public override string GetBalloonTipInfo()
         {
-            return this.State.ToString();
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
 
         public override string GetBalloonTipTitle()
         {
-            return "Sitefinity Nut Activity";
+            return $"Sitefinity Nut Activity ({Title})";
         }
     }
 }

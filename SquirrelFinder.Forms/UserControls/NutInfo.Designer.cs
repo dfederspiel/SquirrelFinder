@@ -43,6 +43,7 @@
             this.buttonStop.TabIndex = 0;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // buttonStart
             // 
@@ -52,6 +53,7 @@
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // buttonRecycle
             // 
@@ -76,7 +78,7 @@
             // 
             // buttonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(349, 34);
+            this.buttonRemove.Location = new System.Drawing.Point(316, 34);
             this.buttonRemove.Name = "buttonRemove";
             this.buttonRemove.Size = new System.Drawing.Size(56, 23);
             this.buttonRemove.TabIndex = 4;
@@ -93,7 +95,7 @@
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonStop);
             this.Name = "NutInfo";
-            this.Size = new System.Drawing.Size(408, 60);
+            this.Size = new System.Drawing.Size(375, 60);
             this.ResumeLayout(false);
             this.PerformLayout();
 

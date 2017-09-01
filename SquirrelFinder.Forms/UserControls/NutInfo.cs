@@ -52,5 +52,23 @@ namespace SquirrelFinder.Forms.UserControls
         {
             Process.Start("chrome.exe", n2.Url.ToString());
         }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (n2.GetType().GetInterfaces().Where(i => i.Name == "ILocalNut").Count() > 0)
+            {
+                var n = (ILocalNut)n2;
+                n.StartSite();
+            }
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            if (n2.GetType().GetInterfaces().Where(i => i.Name == "ILocalNut").Count() > 0)
+            {
+                var n = (ILocalNut)n2;
+                n.StopSite();
+            }
+        }
     }
 }

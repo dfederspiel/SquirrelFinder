@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using SquirrelFinder.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,8 +44,11 @@ namespace SquirrelFinder.Nuts
 
         public bool HasShownMessage { get; set; }
 
+        public string Title { get; set; }
+
         public Nut(Uri url)
         {
+            Title = url.Host;
             Url = url;
         }
 
@@ -86,12 +90,12 @@ namespace SquirrelFinder.Nuts
 
         public virtual string GetBalloonTipInfo()
         {
-            return this.State.ToString();
+            return $"The '{Title}' nut says it's {State.ToString()} - {Guid.NewGuid()}";
         }
 
         public virtual string GetBalloonTipTitle()
         {
-            return "Regular Nut Activity";
+            return $"Public Nut Activity ({Title})";
         }
     }
 
