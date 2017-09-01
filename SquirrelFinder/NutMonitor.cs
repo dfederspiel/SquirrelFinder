@@ -89,7 +89,7 @@ namespace SquirrelFinder
         {
             var manager = new ServerManager();
             var site = manager.Sites.Where(s => s.Name == siteName).FirstOrDefault();
-            return site.Bindings.Select(b => b.Protocol + "://" + b.Host);
+            return site.Bindings.Select(b => b.Protocol + "://" + (b.Host == string.Empty ? "localhost" : b.Host));
         }
 
         #endregion

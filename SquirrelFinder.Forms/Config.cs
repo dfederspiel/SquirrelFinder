@@ -19,7 +19,6 @@ namespace SquirrelFinder.Forms
 
         static NutMonitor _nutMonitor;
         static NotifyIcon _trayIcon;
-        static Timer _timer;
 
         public Config(NutMonitor nutMonitor, NotifyIcon trayIcon)
         {
