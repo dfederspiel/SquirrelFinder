@@ -33,7 +33,7 @@ namespace SquirrelFinder.Forms.UserControls
 
             if (n2.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
             {
-                linkLabelAppDirectory.Click += LinkLabelAppDirectory_Click; ;
+                linkLabelAppDirectory.Click += LinkLabelAppDirectory_Click;
             }
 
             buttonRecycle.Click += ButtonRecycle_Click;
@@ -98,6 +98,12 @@ namespace SquirrelFinder.Forms.UserControls
                 var n = (ILocalNut)n2;
                 n.StopSite();
             }
+        }
+
+        private void linkLabelLogs_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var localNutType = (ILocalNut)n2;
+            Process.Start("explorer.exe", localNutType.Path + "\\App_Data\\Sitefinity\\Logs");
         }
     }
 }

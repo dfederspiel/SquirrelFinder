@@ -35,6 +35,7 @@
             this.buttonRemove = new System.Windows.Forms.Button();
             this.panelStatusLight = new System.Windows.Forms.Panel();
             this.linkLabelAppDirectory = new System.Windows.Forms.LinkLabel();
+            this.linkLabelLogs = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // buttonStop
@@ -104,11 +105,23 @@
             this.linkLabelAppDirectory.TabStop = true;
             this.linkLabelAppDirectory.Text = "Files...";
             // 
+            // linkLabelLogs
+            // 
+            this.linkLabelLogs.AutoSize = true;
+            this.linkLabelLogs.Location = new System.Drawing.Point(237, 34);
+            this.linkLabelLogs.Name = "linkLabelLogs";
+            this.linkLabelLogs.Size = new System.Drawing.Size(39, 13);
+            this.linkLabelLogs.TabIndex = 7;
+            this.linkLabelLogs.TabStop = true;
+            this.linkLabelLogs.Text = "Logs...";
+            this.linkLabelLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLogs_LinkClicked);
+            // 
             // NutInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.linkLabelLogs);
             this.Controls.Add(this.linkLabelAppDirectory);
             this.Controls.Add(this.panelStatusLight);
             this.Controls.Add(this.buttonRemove);
@@ -132,5 +145,6 @@
         private System.Windows.Forms.Button buttonRemove;
         private System.Windows.Forms.Panel panelStatusLight;
         private System.Windows.Forms.LinkLabel linkLabelAppDirectory;
+        private System.Windows.Forms.LinkLabel linkLabelLogs;
     }
 }
