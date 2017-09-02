@@ -36,6 +36,7 @@ namespace SquirrelFinder.Forms
             this.buttonAddToWatch = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxAvailableBindings = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.comboBoxLocalSites = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -60,7 +61,6 @@ namespace SquirrelFinder.Forms
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -126,6 +126,16 @@ namespace SquirrelFinder.Forms
             this.listBoxAvailableBindings.Name = "listBoxAvailableBindings";
             this.listBoxAvailableBindings.Size = new System.Drawing.Size(352, 100);
             this.listBoxAvailableBindings.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(7, 59);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(106, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Choose a Nut";
             // 
             // comboBoxLocalSites
             // 
@@ -209,24 +219,24 @@ namespace SquirrelFinder.Forms
             // loadConfigToolStripMenuItem
             // 
             this.loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.loadConfigToolStripMenuItem.Text = "Load Config...";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.saveToolStripMenuItem.Text = "Save...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
             // 
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // groupBox3
@@ -361,16 +371,6 @@ namespace SquirrelFinder.Forms
             this.tabPage2.Text = "Public Nuts";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(7, 59);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Choose a Nut";
-            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,7 +388,7 @@ namespace SquirrelFinder.Forms
             this.MinimumSize = new System.Drawing.Size(814, 560);
             this.Name = "Config";
             this.Text = "Squirrel Finder Settings";
-            this.Load += new System.EventHandler(this.Config_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Config_FormClosed);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

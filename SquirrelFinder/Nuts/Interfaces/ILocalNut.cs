@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace SquirrelFinder.Nuts
 
         ObjectState ApplicationPoolState { get; set; }
 
+        [JsonIgnore]
         Site Site { get; set; }
+
         string Path { get; }
         void RecycleApplicationPool();
         void StopApplicationPool();

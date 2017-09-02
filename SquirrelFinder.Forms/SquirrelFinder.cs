@@ -86,11 +86,15 @@ namespace SquirrelFinder.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SquirrelFinderSysTrayApp));
             this.SuspendLayout();
+            // 
+            // SquirrelFinderSysTrayApp
+            // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SquirrelFinder";
+            this.Name = "SquirrelFinderSysTrayApp";
             this.Text = "Squirrel Finder";
             this.ResumeLayout(false);
+
         }
         private void SetTimer(int interval)
         {
