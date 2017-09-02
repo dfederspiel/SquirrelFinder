@@ -1,4 +1,5 @@
 ﻿using Microsoft.Web.Administration;
+using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,41 @@ namespace SquirrelFinder
             return path;
         }
 
+        public static Site GetSiteFromUrl(Uri url)
+        {
+            var manager = new ServerManager();
+
+            foreach (var site in manager.Sites)
+            {
+                foreach (var binding in site.Bindings)
+                {
+                    if (binding.Host == (binding.Host == "" ? "" : url.Host) && binding.Protocol == url.Scheme)
+                    {
+                        return site;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static ApplicationPool GetApplicationPoolFromUrl(Uri url)
+        {
+            var manager = new ServerManager();
+
+            foreach (var site in manager.Sites)
+            {
+                foreach (var binding in site.Bindings)
+                {
+                    if (binding.Host == (url.Host == "localhost" ? "" : url.Host) && binding.Protocol == url.Scheme)
+                    {
+                        return manager.ApplicationPools[site.Applications["/"].ApplicationPoolName];
+                    }
+                }
+            }
+            return null;
+
+        }
+
         public async static Task<HttpStatusCode> PeekUrl(string url)
         {
             try
@@ -47,6 +83,12 @@ namespace SquirrelFinder
             {
                 return HttpStatusCode.BadRequest;
             }
+        }
+
+        public static IEnumerable<string> GetSiteBindingsFromSite(Site site)
+        {
+            var manager = new ServerManager();
+            return site.Bindings.Select(b => b.Protocol + "://" + (b.Host == string.Empty ? "localhost" : b.Host));
         }
     }
 }
