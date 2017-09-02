@@ -6,7 +6,7 @@ namespace SquirrelFinder.Nuts
 {
     public interface INut
     {
-        
+        string Type { get; set; }
         void OnNutChanged(NutEventArgs e);
         event EventHandler<NutEventArgs> NutChanged;
         

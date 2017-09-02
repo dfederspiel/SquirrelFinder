@@ -28,35 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonStart = new System.Windows.Forms.Button();
+            this.buttonToggle = new System.Windows.Forms.Button();
             this.buttonRecycle = new System.Windows.Forms.Button();
             this.linkLabelUrl = new System.Windows.Forms.LinkLabel();
-            this.buttonRemove = new System.Windows.Forms.Button();
+            this.ButtonRemove = new System.Windows.Forms.Button();
             this.panelStatusLight = new System.Windows.Forms.Panel();
             this.linkLabelAppDirectory = new System.Windows.Forms.LinkLabel();
             this.linkLabelLogs = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // buttonStop
+            // buttonToggle
             // 
-            this.buttonStop.Location = new System.Drawing.Point(132, 29);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(56, 23);
-            this.buttonStop.TabIndex = 0;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
-            // 
-            // buttonStart
-            // 
-            this.buttonStart.Location = new System.Drawing.Point(70, 29);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(56, 23);
-            this.buttonStart.TabIndex = 1;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            this.buttonToggle.Location = new System.Drawing.Point(70, 29);
+            this.buttonToggle.Name = "buttonToggle";
+            this.buttonToggle.Size = new System.Drawing.Size(56, 23);
+            this.buttonToggle.TabIndex = 1;
+            this.buttonToggle.Text = "Start";
+            this.buttonToggle.UseVisualStyleBackColor = true;
             // 
             // buttonRecycle
             // 
@@ -77,16 +65,15 @@
             this.linkLabelUrl.TabIndex = 3;
             this.linkLabelUrl.TabStop = true;
             this.linkLabelUrl.Text = "linkLabel1";
-            this.linkLabelUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUrl_LinkClicked);
             // 
-            // buttonRemove
+            // ButtonRemove
             // 
-            this.buttonRemove.Location = new System.Drawing.Point(299, 29);
-            this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(56, 23);
-            this.buttonRemove.TabIndex = 4;
-            this.buttonRemove.Text = "Remove";
-            this.buttonRemove.UseVisualStyleBackColor = true;
+            this.ButtonRemove.Location = new System.Drawing.Point(299, 29);
+            this.ButtonRemove.Name = "ButtonRemove";
+            this.ButtonRemove.Size = new System.Drawing.Size(56, 23);
+            this.ButtonRemove.TabIndex = 4;
+            this.ButtonRemove.Text = "Remove";
+            this.ButtonRemove.UseVisualStyleBackColor = true;
             // 
             // panelStatusLight
             // 
@@ -114,7 +101,6 @@
             this.linkLabelLogs.TabIndex = 7;
             this.linkLabelLogs.TabStop = true;
             this.linkLabelLogs.Text = "Logs...";
-            this.linkLabelLogs.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLogs_LinkClicked);
             // 
             // NutInfo
             // 
@@ -124,11 +110,10 @@
             this.Controls.Add(this.linkLabelLogs);
             this.Controls.Add(this.linkLabelAppDirectory);
             this.Controls.Add(this.panelStatusLight);
-            this.Controls.Add(this.buttonRemove);
+            this.Controls.Add(this.ButtonRemove);
             this.Controls.Add(this.linkLabelUrl);
             this.Controls.Add(this.buttonRecycle);
-            this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.buttonStop);
+            this.Controls.Add(this.buttonToggle);
             this.Name = "NutInfo";
             this.Size = new System.Drawing.Size(361, 58);
             this.ResumeLayout(false);
@@ -137,12 +122,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button buttonStop;
-        private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Button buttonToggle;
         private System.Windows.Forms.Button buttonRecycle;
         private System.Windows.Forms.LinkLabel linkLabelUrl;
-        private System.Windows.Forms.Button buttonRemove;
+        private System.Windows.Forms.Button ButtonRemove;
         private System.Windows.Forms.Panel panelStatusLight;
         private System.Windows.Forms.LinkLabel linkLabelAppDirectory;
         private System.Windows.Forms.LinkLabel linkLabelLogs;

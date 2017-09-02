@@ -76,7 +76,7 @@ namespace SquirrelFinder.Tests
             _monitor.AddNut(new Nut(new Uri("http://codewars.com")));
             _monitor.AddNut(new Nut(new Uri("http://localhost.com")));
             _monitor.AddNut(new Nut(new Uri("http://examples.local")));
-            await _monitor.PeekAll();
+            await _monitor.PeekAllNuts();
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace SquirrelFinder.Tests
                     if(n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.RecycleSite();
+                        x.RecycleApplicationPool();
                     }
                 });
             }
@@ -123,7 +123,7 @@ namespace SquirrelFinder.Tests
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.StartSite();
+                        x.StartApplicationPool();
                     }
                 });
             }
@@ -137,7 +137,7 @@ namespace SquirrelFinder.Tests
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.StopSite();
+                        x.StopApplicationPool();
                     }
                 });
             }

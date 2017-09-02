@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.Administration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,15 @@ namespace SquirrelFinder.Nuts
 {
     public interface ILocalNut : INut
     {
+        void OnSiteStateChanged(NutEventArgs e);
+        event EventHandler<NutEventArgs> SiteStateChanged;
+
+        ObjectState ApplicationPoolState { get; set; }
+
+        Site Site { get; set; }
         string Path { get; }
-        void RecycleSite();
-        void StopSite();
-        void StartSite();
+        void RecycleApplicationPool();
+        void StopApplicationPool();
+        void StartApplicationPool();
     }
 }
