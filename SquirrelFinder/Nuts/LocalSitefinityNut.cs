@@ -12,22 +12,11 @@ namespace SquirrelFinder.Nuts
 {
     public class LocalSitefinityNut : LocalNut
     {
-        FileSystemWatcher _watcher;
-
         public LocalSitefinityNut() : base() { }
 
         public LocalSitefinityNut(Uri url) : base(url)
         {
-            //_watcher = new FileSystemWatcher(NutHelper.GetDirectoryFromUrl(url.ToString()) + "/App_Data/Sitefinity/Logs") { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName };
-            //_watcher.EnableRaisingEvents = true;
-            //_watcher.Changed += _watcher_Changed;
-            //_watcher.Created += _watcher_Created;
-            //_watcher.Renamed += _watcher_Renamed;
-            //_watcher.Deleted += _watcher_Deleted;
 
-            //Timer t = new Timer(1000);
-            //t.Elapsed += T_Elapsed;
-            //t.Start();
         }
 
         public override HttpStatusCode Peek(int timeout = 5000)

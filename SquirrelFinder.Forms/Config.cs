@@ -18,6 +18,17 @@ namespace SquirrelFinder.Forms
             _nutManager = nutManager ?? new NutManager();
             _nutManager.NutCollectionChanged += _squirrelFinder_NutsChanged;
             _trayIcon = trayIcon;
+
+            if (File.Exists("nutbox.json"))
+            {
+                var nutBox = NutSaver.GetNuts();
+                _nutManager.Nuts.Clear();
+                _nutManager.Nuts.AddRange(nutBox.LocalSitefinityNuts);
+                _nutManager.Nuts.AddRange(nutBox.SitefinityNuts);
+                _nutManager.Nuts.AddRange(nutBox.LocalNuts);
+                _nutManager.Nuts.AddRange(nutBox.Nuts);
+            }
+
             InitializeComponent();
             InitializeLocalSites();
 
@@ -88,9 +99,9 @@ namespace SquirrelFinder.Forms
             }
         }
 
-        private void Config_Load(object sender, EventArgs e)
+        private void Config_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            NutSaver.SaveNuts(_nutManager.Nuts);
         }
     }
 }

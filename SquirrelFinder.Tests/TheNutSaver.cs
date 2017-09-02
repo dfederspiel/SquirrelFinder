@@ -35,9 +35,9 @@ namespace SquirrelFinder.Tests
         [TestMethod]
         public void CanRetrieveNutsAsAListOfINuts()
         {
-            var myNuts = new List<Nut> { _publicNut };
-            const string json = "[{'Url':'http://github.com','State':0,'LastResponse':0,'HasShownMessage':false,'Title':'github.com','Type':null},{'Url':'http://localhost','State':0,'LastResponse':0,'HasShownMessage':false,'Title':'localhost','Type':null},{'Type':'SquirrelFinder.Nuts.LocalSitefinityNut','Url':'http://basitefinityoob.local','State':0,'LastResponse':0,'HasShownMessage':false,'Title':'basitefinityoob.local'},{'Type':'SquirrelFinder.Nuts.PublicSitefinityNut','Url':'http://google.com','State':0,'LastResponse':0,'HasShownMessage':false,'Title':'basitefinityoob.local'}]";
-            Console.WriteLine(NutSaver.GetNuts(json));
+            var myNuts = new List<Nut> { _publicNut, _localNut, _sitefinityLocalNut, _sitefinityPublicNut };
+            NutSaver.SaveNuts(myNuts);
+            var nutBox = NutSaver.GetNuts();
         }
     }
 }

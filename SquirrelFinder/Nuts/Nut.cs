@@ -55,6 +55,7 @@ namespace SquirrelFinder.Nuts
         {
             Title = url.Host;
             Url = url;
+            Type = GetType().ToString();
         }
 
         public virtual void OnNutChanged(NutEventArgs e)
