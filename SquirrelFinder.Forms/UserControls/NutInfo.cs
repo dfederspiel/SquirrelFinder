@@ -55,7 +55,9 @@ namespace SquirrelFinder.Forms.UserControls
             }
             ButtonRemove.Click += ButtonRemove_Click;
 
+
             UpdateControl();
+            UpdateButtonToggleText();
         }
 
         private void NutInfo_SiteStateChanged(object sender, NutEventArgs e)
@@ -69,21 +71,25 @@ namespace SquirrelFinder.Forms.UserControls
 
             if (_nut is ILocalNut)
             {
-                switch (localNut.ApplicationPoolState)
-                {
-                    case ObjectState.Started:
-                    case ObjectState.Starting:
-                        buttonToggle.Text = "Stop";
-                        break;
-                    case ObjectState.Stopped:
-                    case ObjectState.Stopping:
-                        buttonToggle.Text = "Start";
-                        break;
-                    case ObjectState.Unknown:
-                        buttonToggle.Text = "...";
-                        break;
-                }
+                SetButtonTextFromState(localNut);
+            }
+        }
 
+        private void SetButtonTextFromState(ILocalNut localNut)
+        {
+            switch (localNut.ApplicationPoolState)
+            {
+                case ObjectState.Started:
+                case ObjectState.Starting:
+                    buttonToggle.Text = "Stop";
+                    break;
+                case ObjectState.Stopped:
+                case ObjectState.Stopping:
+                    buttonToggle.Text = "Start";
+                    break;
+                case ObjectState.Unknown:
+                    buttonToggle.Text = "...";
+                    break;
             }
         }
 
@@ -93,6 +99,7 @@ namespace SquirrelFinder.Forms.UserControls
             if(_nut is ILocalNut)
             {
                 var state = GetApplicationPoolState();
+                SetButtonTextFromState(_nut as ILocalNut);
             }
         }
 
