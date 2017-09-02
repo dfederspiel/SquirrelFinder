@@ -60,7 +60,7 @@
     <Compile Include="TheNutHelper.cs" />
     <Compile Include="TheSquirrelFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TheSerializer.cs" />
+    <Compile Include="TheNutSaver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

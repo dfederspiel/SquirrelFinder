@@ -93,8 +93,7 @@ namespace SquirrelFinder
 
         public async Task PeekAllNuts()
         {
-            var tempNuts = new List<INut>();
-            tempNuts = Nuts;
+            var tempNuts = new List<INut>(Nuts);
             foreach (var nut in tempNuts)
             {
                 await Task.Run(() =>

@@ -12,6 +12,7 @@ namespace SquirrelFinder.Nuts
     public class LocalNut : Nut, ILocalNut
     {
         ServerManager _manager;
+
         public Site Site { get; set; }
         public string Path { get { return NutHelper.GetDirectoryFromUrl(Url.ToString()); } }
         public ObjectState ApplicationPoolState { get; set; }
