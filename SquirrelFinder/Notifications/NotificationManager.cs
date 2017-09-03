@@ -34,8 +34,7 @@ namespace SquirrelFinder.Notifications
 
         public static Notification GetNotificationForMessage(string balloonTipText)
         {
-            var notification = Notifications.Where(n => n.Key == getGuidFromText(balloonTipText)).FirstOrDefault().Value;
-            return notification;
+            return Notifications.Where(n => n.Key == getGuidFromText(balloonTipText)).FirstOrDefault().Value;
         }
 
         static Guid getGuidFromText(string text)
