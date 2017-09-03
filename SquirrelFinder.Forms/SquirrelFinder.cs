@@ -8,12 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using SquirrelFinder.Sounds;
 
 namespace SquirrelFinder.Forms
 {
     public class SquirrelFinderSysTrayApp : Form
     {
         static NutManager _nutManager;
+        static SoundManager _soundManager;
         static System.Windows.Forms.Timer _timer;
         static NotifyIcon _trayIcon;
         static ContextMenuStrip _trayMenu;
@@ -27,6 +29,8 @@ namespace SquirrelFinder.Forms
 
         public SquirrelFinderSysTrayApp()
         {
+            _soundManager = new SoundManager();
+
             _nutManager = new NutManager();
 
             _nutManager.NutCollectionChanged    += NutManager_NutsChanged;
@@ -76,7 +80,8 @@ namespace SquirrelFinder.Forms
                 NotificationManager.Add(nut, title, message);
                 _trayIcon.ShowBalloonTip(nut.State != NutState.Found ? 2000 : 10000);
 
-                _nutManager.PlayTone(tone);
+                _soundManager.PlayTone(tone);
+
                 nut.HasShownMessage = true;
             }
         }
