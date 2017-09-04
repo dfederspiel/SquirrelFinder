@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace SquirrelFinder.Nuts
 {
@@ -29,6 +30,12 @@ namespace SquirrelFinder.Nuts
         {
             _manager = new ServerManager();
             Site = NutHelper.GetSiteFromUrl(Url);
+        }
+
+        public override HttpStatusCode Peek(int timeout = 5000)
+        {
+            ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
+            return base.Peek(timeout);
         }
 
         public override string GetBalloonTipInfo()

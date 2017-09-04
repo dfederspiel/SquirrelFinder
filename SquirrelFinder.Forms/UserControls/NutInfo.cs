@@ -42,8 +42,6 @@ namespace SquirrelFinder.Forms.UserControls
                 buttonRecycle.Click += ButtonRecycle_Click;
                 buttonToggle.Click += ButtonToggle_Click;
 
-                UpdateButtonToggleText();
-
                 (n2 as ILocalNut).SiteStateChanged += NutInfo_SiteStateChanged;
             }
             else
@@ -53,8 +51,8 @@ namespace SquirrelFinder.Forms.UserControls
                 buttonRecycle.Visible = false;
                 buttonToggle.Visible = false;
             }
-            ButtonRemove.Click += ButtonRemove_Click;
 
+            ButtonRemove.Click += ButtonRemove_Click;
 
             UpdateControl();
             UpdateButtonToggleText();
@@ -62,41 +60,52 @@ namespace SquirrelFinder.Forms.UserControls
 
         private void NutInfo_SiteStateChanged(object sender, NutEventArgs e)
         {
+            UpdateControl();
             UpdateButtonToggleText();
         }
 
         private void UpdateButtonToggleText()
         {
-            var localNut = (_nut as ILocalNut);
-
             if (_nut is ILocalNut)
             {
-                SetButtonTextFromState(localNut);
+                SetButtonTextFromState((_nut as ILocalNut));
             }
         }
 
+        delegate void SetTextCallback(ILocalNut nut);
         private void SetButtonTextFromState(ILocalNut localNut)
         {
+            var text = "";
             switch (localNut.ApplicationPoolState)
             {
                 case ObjectState.Started:
                 case ObjectState.Starting:
-                    buttonToggle.Text = "Stop";
+                    text = "Stop";
                     break;
                 case ObjectState.Stopped:
                 case ObjectState.Stopping:
-                    buttonToggle.Text = "Start";
+                    text = "Start";
                     break;
                 case ObjectState.Unknown:
-                    buttonToggle.Text = "...";
+                    text = "...";
                     break;
+            }
+
+            if (buttonToggle.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(SetButtonTextFromState);
+                Invoke(d, new object[] { localNut });
+            }
+            else
+            {
+                buttonToggle.Text = text;
             }
         }
 
         private void UpdateControl()
         {
             SetNutInfoColorStatus();
-            if(_nut is ILocalNut)
+            if (_nut is ILocalNut)
             {
                 var state = GetApplicationPoolState();
                 SetButtonTextFromState(_nut as ILocalNut);
@@ -121,6 +130,28 @@ namespace SquirrelFinder.Forms.UserControls
         private void N2_NutChanged(object sender, NutEventArgs e)
         {
             UpdateControl();
+        }
+
+        private void ToggleApplicationPoolState()
+        {
+            if (_nut is ILocalNut)
+            {
+                var localNut = (_nut as ILocalNut);
+                switch (localNut.ApplicationPoolState)
+                {
+                    case ObjectState.Started:
+                    case ObjectState.Starting:
+                        localNut.StopApplicationPool();
+                        break;
+                    case ObjectState.Stopped:
+                    case ObjectState.Stopping:
+                        localNut.StartApplicationPool();
+                        break;
+                    case ObjectState.Unknown:
+                        break;
+                }
+
+            }
         }
 
         private void ButtonRemove_Click(object sender, EventArgs e)
@@ -149,29 +180,6 @@ namespace SquirrelFinder.Forms.UserControls
         private void ButtonToggle_Click(object sender, EventArgs e)
         {
             ToggleApplicationPoolState();
-        }
-
-        private void ToggleApplicationPoolState()
-        {
-            var localNut = (_nut as ILocalNut);
-
-            if (_nut is ILocalNut)
-            {
-                switch (localNut.ApplicationPoolState)
-                {
-                    case ObjectState.Started:
-                    case ObjectState.Starting:
-                        localNut.StopApplicationPool();
-                        break;
-                    case ObjectState.Stopped:
-                    case ObjectState.Stopping:
-                        localNut.StartApplicationPool();
-                        break;
-                    case ObjectState.Unknown:
-                        break;
-                }
-
-            }
         }
 
         private void LinkLabelUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

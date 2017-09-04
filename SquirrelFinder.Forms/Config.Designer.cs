@@ -61,6 +61,7 @@ namespace SquirrelFinder.Forms
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.loadPreviousConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -208,6 +209,7 @@ namespace SquirrelFinder.Forms
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadPreviousConfigToolStripMenuItem,
             this.loadConfigToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.toolStripSeparator1,
@@ -218,25 +220,28 @@ namespace SquirrelFinder.Forms
             // 
             // loadConfigToolStripMenuItem
             // 
+            this.loadConfigToolStripMenuItem.Enabled = false;
             this.loadConfigToolStripMenuItem.Name = "loadConfigToolStripMenuItem";
-            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.loadConfigToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.loadConfigToolStripMenuItem.Text = "Load Config...";
             // 
             // saveToolStripMenuItem
             // 
+            this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.saveToolStripMenuItem.Text = "Save...";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
             // 
             // resetToolStripMenuItem
             // 
+            this.resetToolStripMenuItem.Enabled = false;
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // groupBox3
@@ -371,6 +376,13 @@ namespace SquirrelFinder.Forms
             this.tabPage2.Text = "Public Nuts";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // loadPreviousConfigToolStripMenuItem
+            // 
+            this.loadPreviousConfigToolStripMenuItem.Name = "loadPreviousConfigToolStripMenuItem";
+            this.loadPreviousConfigToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.loadPreviousConfigToolStripMenuItem.Text = "Load Previous Config";
+            this.loadPreviousConfigToolStripMenuItem.Click += new System.EventHandler(this.loadPreviousConfigToolStripMenuItem_Click);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,5 +448,6 @@ namespace SquirrelFinder.Forms
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBoxIsSitefinity;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem loadPreviousConfigToolStripMenuItem;
     }
 }

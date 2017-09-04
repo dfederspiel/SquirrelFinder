@@ -22,6 +22,8 @@ namespace SquirrelFinder.Nuts
         public override HttpStatusCode Peek(int timeout = 5000)
         {
             NutState currentState = State;
+            ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
+
             var request = WebRequest.Create(Url);
             request.Timeout = timeout;
             try
