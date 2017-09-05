@@ -114,7 +114,11 @@ namespace SquirrelFinder.Forms.UserControls
 
         private ObjectState GetApplicationPoolState()
         {
-            return NutHelper.GetApplicationPoolFromUrl(_nut.Url).State;
+            var appPool = NutHelper.GetApplicationPoolFromUrl(_nut.Url);
+            if(appPool != null)
+                return appPool.State;
+
+            return ObjectState.Unknown;
         }
 
         private void SetNutInfoColorStatus()

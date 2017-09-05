@@ -13,9 +13,12 @@ namespace SquirrelFinder.Notifications
     {
         public static Dictionary<Guid, Notification> Notifications = new Dictionary<Guid, Notification>();
 
+        NotifyIcon _icon;
+
         public NotificationManager(NotifyIcon icon)
         {
             // For eventual queue of messages
+            _icon = icon;
         }
 
         public static void Add(INut nut, string title, string message)

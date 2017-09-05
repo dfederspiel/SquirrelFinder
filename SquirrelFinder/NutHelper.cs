@@ -13,10 +13,9 @@ namespace SquirrelFinder
     {
         public static string GetDirectoryFromUrl(string url)
         {
-            if (string.IsNullOrEmpty(url)) return "";
+            if (string.IsNullOrEmpty(url)) return null;
             var u = new Uri(url);
 
-            var path = "";
             var manager = new ServerManager();
 
             foreach (var site in manager.Sites)
@@ -25,11 +24,11 @@ namespace SquirrelFinder
                 {
                     if (((binding.Host == "" && u.Host == "localhost") || binding.Host == u.Host) && binding.Protocol == u.Scheme)
                     {
-                        path = site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
+                        return site.Applications["/"].VirtualDirectories["/"].PhysicalPath;
                     }
                 }
             }
-            return path;
+            return null;
         }
 
         public static Site GetSiteFromUrl(Uri url)
@@ -40,7 +39,7 @@ namespace SquirrelFinder
             {
                 foreach (var binding in site.Bindings)
                 {
-                    if (binding.Host == (binding.Host == "" ? "" : url.Host) && binding.Protocol == url.Scheme)
+                    if (((binding.Host == "" && url.Host == "localhost") || binding.Host == url.Host) && binding.Protocol == url.Scheme)
                     {
                         return site;
                     }
@@ -64,7 +63,6 @@ namespace SquirrelFinder
                 }
             }
             return null;
-
         }
 
         public async static Task<HttpStatusCode> PeekUrl(string url)
@@ -89,6 +87,15 @@ namespace SquirrelFinder
         {
             var manager = new ServerManager();
             return site.Bindings.Select(b => b.Protocol + "://" + (b.Host == string.Empty ? "localhost" : b.Host));
+        }
+
+        public static bool LocalSiteExists(ILocalNut nut)
+        {
+            var site = GetSiteFromUrl(nut.Url);
+            if (site == null)
+                return false;
+
+            return true;
         }
     }
 }
