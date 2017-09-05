@@ -34,9 +34,7 @@ namespace SquirrelFinder.Nuts
 
         public override HttpStatusCode Peek(int timeout = 5000)
         {
-            var appPool = NutHelper.GetApplicationPoolFromUrl(Url);
-            if(appPool != null)
-                ApplicationPoolState = appPool.State;
+            ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
             return base.Peek(timeout);
         }
 
