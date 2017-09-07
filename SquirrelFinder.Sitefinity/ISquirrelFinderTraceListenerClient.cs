@@ -1,4 +1,4 @@
-﻿namespace SquirrelFinderLogging
+﻿namespace SquirrelFinder.Sitefinity
 {
     public interface ISquirrelFinderTraceListenerClient
     {

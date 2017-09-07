@@ -2,7 +2,7 @@
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Logging;
 
-namespace SquirrelFinderLogging
+namespace SquirrelFinder.Sitefinity
 {
     public class SquirrelFinderConfigurator : ISitefinityLogCategoryConfigurator
     {

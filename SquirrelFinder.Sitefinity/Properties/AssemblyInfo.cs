@@ -1,4 +1,4 @@
-﻿using SquirrelFinderLogging;
+﻿using SquirrelFinder.Sitefinity;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
