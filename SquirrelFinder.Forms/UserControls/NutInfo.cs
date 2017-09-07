@@ -17,6 +17,7 @@ namespace SquirrelFinder.Forms.UserControls
     {
         INut _nut;
         NutManager _nutMonitor;
+        Errors _errorsForm;
 
         public NutInfo()
         {
@@ -52,10 +53,28 @@ namespace SquirrelFinder.Forms.UserControls
                 buttonToggle.Visible = false;
             }
 
+            if(n2 is ISitefinityNut)
+            {
+                linkLabelErrors.Click += LinkLabelErrors_Click;
+                var sNut = n2 as ISitefinityNut;
+                
+            } else
+            {
+                linkLabelErrors.Visible = false;
+            }
+
             ButtonRemove.Click += ButtonRemove_Click;
 
             UpdateControl();
             UpdateButtonToggleText();
+        }
+
+        private void LinkLabelErrors_Click(object sender, EventArgs e)
+        {
+            var sNut = _nut as ISitefinityNut;
+            _errorsForm = new Errors(sNut.LogEntries);
+            _errorsForm.Show();
+
         }
 
         private void NutInfo_SiteStateChanged(object sender, NutEventArgs e)
@@ -73,6 +92,8 @@ namespace SquirrelFinder.Forms.UserControls
         }
 
         delegate void SetTextCallback(ILocalNut nut);
+        delegate void SetControlTextCallback(Control c, string text);
+
         private void SetButtonTextFromState(ILocalNut localNut)
         {
             var text = "";
@@ -102,6 +123,18 @@ namespace SquirrelFinder.Forms.UserControls
             }
         }
 
+        private void SetControlText(Control c, string text)
+        {
+            if (c.InvokeRequired)
+            {
+                SetControlTextCallback d = new SetControlTextCallback(SetControlText);
+                Invoke(d, new object[] { c, text });
+            } else
+            {
+                c.Text = text;
+            }
+        }
+
         private void UpdateControl()
         {
             SetNutInfoColorStatus();
@@ -110,11 +143,18 @@ namespace SquirrelFinder.Forms.UserControls
                 var state = GetApplicationPoolState();
                 SetButtonTextFromState(_nut as ILocalNut);
             }
+
+            if (_nut is ISitefinityNut)
+                SetControlText(linkLabelErrors, $"Errors ({(_nut as ISitefinityNut).LogEntries?.Count ?? 0 })");
         }
 
         private ObjectState GetApplicationPoolState()
         {
-            return NutHelper.GetApplicationPoolFromUrl(_nut.Url).State;
+            var appPool = NutHelper.GetApplicationPoolFromUrl(_nut.Url);
+            if (appPool != null)
+                return appPool.State;
+
+            return ObjectState.Unknown;
         }
 
         private void SetNutInfoColorStatus()

@@ -51,11 +51,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="INutManager.cs" />
+    <Compile Include="LogEntry.cs" />
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Notifications\NotificationManager.cs" />
     <Compile Include="NutHelper.cs" />
     <Compile Include="Nuts\Interfaces\ILocalNut.cs" />
     <Compile Include="Nuts\Interfaces\INut.cs" />
+    <Compile Include="Nuts\Interfaces\ISitefinityNut.cs" />
     <Compile Include="Nuts\LocalNut.cs" />
     <Compile Include="Nuts\Nut.cs" />
     <Compile Include="Nuts\LocalSitefinityNut.cs" />
