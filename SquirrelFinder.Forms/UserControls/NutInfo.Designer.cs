@@ -112,6 +112,7 @@
             this.linkLabelErrors.TabIndex = 8;
             this.linkLabelErrors.TabStop = true;
             this.linkLabelErrors.Text = "Errors (0)";
+            this.linkLabelErrors.Visible = false;
             // 
             // NutInfo
             // 

@@ -80,7 +80,7 @@ namespace SquirrelFinder.Forms
                 NotificationManager.Add(nut, title, message);
                 _trayIcon.ShowBalloonTip(nut.State != NutState.Found ? 2000 : 10000);
 
-                _soundManager.PlayTone(tone);
+                //_soundManager.PlayTone(tone);
 
                 nut.HasShownMessage = true;
             }

@@ -53,12 +53,11 @@ namespace SquirrelFinder.Forms.UserControls
                 buttonToggle.Visible = false;
             }
 
-            if(n2 is ISitefinityNut)
+            if (n2 is ISitefinityNut)
             {
                 linkLabelErrors.Click += LinkLabelErrors_Click;
-                var sNut = n2 as ISitefinityNut;
-                
-            } else
+            }
+            else
             {
                 linkLabelErrors.Visible = false;
             }
@@ -91,9 +90,7 @@ namespace SquirrelFinder.Forms.UserControls
             }
         }
 
-        delegate void SetTextCallback(ILocalNut nut);
-        delegate void SetControlTextCallback(Control c, string text);
-
+        delegate void SetButtonTextCallback(ILocalNut nut);
         private void SetButtonTextFromState(ILocalNut localNut)
         {
             var text = "";
@@ -114,7 +111,7 @@ namespace SquirrelFinder.Forms.UserControls
 
             if (buttonToggle.InvokeRequired)
             {
-                SetTextCallback d = new SetTextCallback(SetButtonTextFromState);
+                SetButtonTextCallback d = new SetButtonTextCallback(SetButtonTextFromState);
                 Invoke(d, new object[] { localNut });
             }
             else
@@ -123,15 +120,44 @@ namespace SquirrelFinder.Forms.UserControls
             }
         }
 
+        delegate void SetControlTextCallback(Control c, string text);
         private void SetControlText(Control c, string text)
         {
             if (c.InvokeRequired)
             {
                 SetControlTextCallback d = new SetControlTextCallback(SetControlText);
                 Invoke(d, new object[] { c, text });
-            } else
+            }
+            else
             {
                 c.Text = text;
+            }
+        }
+
+        delegate void ControlCallback(Control c);
+        private void ShowControl(Control c)
+        {
+            if (c.InvokeRequired)
+            {
+                ControlCallback d = new ControlCallback(ShowControl);
+                Invoke(d, new object[] { c });
+            }
+            else
+            {
+                c.Show();
+            }
+        }
+
+        private void HideControl(Control c)
+        {
+            if (c.InvokeRequired)
+            {
+                ControlCallback d = new ControlCallback(HideControl);
+                Invoke(d, new object[] { c });
+            }
+            else
+            {
+                c.Hide();
             }
         }
 
@@ -145,7 +171,17 @@ namespace SquirrelFinder.Forms.UserControls
             }
 
             if (_nut is ISitefinityNut)
-                SetControlText(linkLabelErrors, $"Errors ({(_nut as ISitefinityNut).LogEntries?.Count ?? 0 })");
+            {
+                
+                var sNut = _nut as ISitefinityNut;
+                if(sNut.GetLogEntries() != null)
+                {
+                    SetControlText(linkLabelErrors, $"Errors ({(_nut as ISitefinityNut).LogEntries?.Count ?? 0 })");
+                    ShowControl(linkLabelErrors);
+                }
+                else
+                    HideControl(linkLabelErrors);
+            }
         }
 
         private ObjectState GetApplicationPoolState()

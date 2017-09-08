@@ -63,7 +63,7 @@ namespace SquirrelFinder.Nuts
             NutChanged?.Invoke(this, e);
         }
 
-        public virtual HttpStatusCode Peek(int timeout = 5000)
+        public virtual void Peek(int timeout = 5000)
         {
             NutState currentState = State;
             var request = WebRequest.Create(Url);
@@ -79,7 +79,6 @@ namespace SquirrelFinder.Nuts
                         HasShownMessage = false;
 
                     OnNutChanged(new NutEventArgs(this));
-                    return response.StatusCode;
                 }
             }
             catch
@@ -91,7 +90,6 @@ namespace SquirrelFinder.Nuts
                 HasShownMessage = false;
 
             OnNutChanged(new NutEventArgs(this));
-            return HttpStatusCode.NotFound;
         }
 
         public virtual string GetBalloonTipInfo()
