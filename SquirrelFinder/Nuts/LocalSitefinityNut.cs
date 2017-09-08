@@ -12,56 +12,18 @@ namespace SquirrelFinder.Nuts
 {
     public class LocalSitefinityNut : LocalNut
     {
-        FileSystemWatcher _watcher;
-
         public LocalSitefinityNut() : base() { }
 
         public LocalSitefinityNut(Uri url) : base(url)
         {
-            _watcher = new FileSystemWatcher(NutHelper.GetDirectoryFromUrl(url.ToString()) + "/App_Data/Sitefinity/Logs") { NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName };
-            _watcher.EnableRaisingEvents = true;
-            _watcher.Changed += _watcher_Changed;
-            _watcher.Created += _watcher_Created;
-            _watcher.Renamed += _watcher_Renamed;
-            _watcher.Deleted += _watcher_Deleted;
 
-            Timer t = new Timer(1000);
-            t.Elapsed += T_Elapsed;
-            t.Start();
-        }
-
-        private void _watcher_Deleted(object sender, FileSystemEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void _watcher_Renamed(object sender, RenamedEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void _watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void T_Elapsed(object sender, ElapsedEventArgs e)
-        {
-            //try
-            //{
-            //    var lines = File.ReadAllLines(NutHelper.GetDirectoryFromUrl(Url.ToString()) + "/App_Data/Sitefinity/Logs/Error.log");
-            //}
-            //catch { }
-        }
-
-        private void _watcher_Changed(object sender, FileSystemEventArgs e)
-        {
-            //var watcher = (FileSystemWatcher)sender;
         }
 
         public override HttpStatusCode Peek(int timeout = 5000)
         {
             NutState currentState = State;
+            ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
+
             var request = WebRequest.Create(Url);
             request.Timeout = timeout;
             try

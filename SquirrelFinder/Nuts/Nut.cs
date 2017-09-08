@@ -47,12 +47,15 @@ namespace SquirrelFinder.Nuts
 
         public string Title { get; set; }
 
+        public string Type { get; set; }
+
         public Nut() { }
 
         public Nut(Uri url)
         {
             Title = url.Host;
             Url = url;
+            Type = GetType().ToString();
         }
 
         public virtual void OnNutChanged(NutEventArgs e)

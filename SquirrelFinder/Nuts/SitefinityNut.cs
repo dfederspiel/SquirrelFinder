@@ -11,7 +11,7 @@ namespace SquirrelFinder.Nuts
 {
     public class SitefinityNut : Nut
     {
-        public SitefinityNut() { }
+        public SitefinityNut() : base() { }
 
         public SitefinityNut(Uri url) : base(url) { }
 

@@ -2,9 +2,9 @@
 using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Media;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,38 +12,10 @@ using System.Threading.Tasks;
 namespace SquirrelFinder
 {
 
-    public enum SquirrelFinderSound
+    public class NutManager : INutManager
     {
-        None,
-        FlatLine,
-        Gears,
-        Squirrel
-    }
-
-    public class NutManager
-    {
-        static SoundPlayer _player = new SoundPlayer();
-        SquirrelFinderSound _currentSound = SquirrelFinderSound.None;
-
         public event EventHandler<NutCollectionEventArgs> NutCollectionChanged;
         public event EventHandler<NutEventArgs> NutChanged;
-
-        FileSystemWatcher watcher = new FileSystemWatcher();
-
-        public NutState CurrentState = NutState.Found;
-
-        static string _squirrelSound = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\squirrel.wav";
-        static string _gearsSound = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\gears.wav";
-        static string _flatLine = AppDomain.CurrentDomain.BaseDirectory + "\\sounds\\flatline.wav";
-
-        private List<INut> _nuts;
-        public List<INut> Nuts { get { return _nuts; } set { _nuts = value; } }
-
-        public NutManager()
-        {
-            Nuts = new List<INut>();
-        }
-
         public virtual void OnNutCollectionChanged(NutCollectionEventArgs e)
         {
             NutCollectionChanged?.Invoke(this, e);
@@ -52,6 +24,19 @@ namespace SquirrelFinder
         public virtual void OnNutChanged(NutEventArgs e)
         {
             NutChanged?.Invoke(this, e);
+        }
+
+        FileSystemWatcher watcher = new FileSystemWatcher();
+
+        public NutState CurrentState = NutState.Found;
+
+        private readonly List<INut> _nuts;
+        public ReadOnlyCollection<INut> Nuts { get; private set; }
+
+        public NutManager()
+        {
+            _nuts = new List<INut>();
+            Nuts = _nuts.AsReadOnly();
         }
 
         #region IISSiteTools
@@ -63,14 +48,6 @@ namespace SquirrelFinder
                 yield return site.Name;
         }
 
-        //public string GetSitePathFromUrl(string url)
-        //{
-        //    if (string.IsNullOrEmpty(url))
-        //        return string.Empty;
-
-        //    return NutHelper.GetDirectoryFromUrl(url);
-        //}
-
         public IEnumerable<string> GetSiteBindings(string siteName)
         {
             var manager = new ServerManager();
@@ -80,12 +57,12 @@ namespace SquirrelFinder
 
         #endregion
 
-        public void AddNut(INut nut)
+        public virtual void AddNut(INut nut)
         {
-            Nuts.Add(nut);
+            _nuts.Add(nut);
             nut.NutChanged += Nut_NutChanged;
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
         private void Nut_NutChanged(object sender, NutEventArgs e)
@@ -93,16 +70,17 @@ namespace SquirrelFinder
             OnNutChanged(e);
         }
 
-        public void RemoveNut(INut nut)
+        public virtual void RemoveNut(INut nut)
         {
-            Nuts.Remove(nut);
+            _nuts.Remove(nut);
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
-        public async Task PeekAll()
+        public async Task PeekAllNuts()
         {
-            foreach (var nut in Nuts)
+            var tempNuts = new List<INut>(_nuts);
+            foreach (var nut in tempNuts)
             {
                 await Task.Run(() =>
                 {
@@ -111,33 +89,20 @@ namespace SquirrelFinder
             }
         }
 
-        public void PlayTone(SquirrelFinderSound sound)
+        public void OpenNutBox(NutBox nutBox)
         {
-            if (sound == _currentSound) return;
-            _currentSound = sound;
+            _nuts.Clear();
+            AddNuts(nutBox.LocalSitefinityNuts.ToList<INut>());
+            AddNuts(nutBox.SitefinityNuts.ToList<INut>());
+            AddNuts(nutBox.LocalNuts.ToList<INut>());
+            AddNuts(nutBox.Nuts.ToList<INut>());
+        }
 
-            var soundToPlay = "";
-            switch (sound)
+        void AddNuts(List<INut> nuts)
+        {
+            foreach(var nut in nuts)
             {
-                case SquirrelFinderSound.FlatLine:
-                    soundToPlay = _flatLine;
-                    CurrentState = NutState.Lost;
-                    break;
-                case SquirrelFinderSound.Gears:
-                    soundToPlay = _gearsSound;
-                    CurrentState = NutState.Searching;
-                    break;
-                case SquirrelFinderSound.Squirrel:
-                    soundToPlay = _squirrelSound;
-                    CurrentState = NutState.Found;
-                    break;
-            }
-
-            if (sound != SquirrelFinderSound.None)
-            {
-                _player.Stop();
-                _player.SoundLocation = soundToPlay;
-                _player.Play();
+                AddNut(nut);
             }
         }
     }

@@ -6,36 +6,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace SquirrelFinder.Nuts
 {
     public class LocalNut : Nut, ILocalNut
     {
         ServerManager _manager;
-        Site _site;
 
+        public Site Site { get; set; }
         public string Path { get { return NutHelper.GetDirectoryFromUrl(Url.ToString()); } }
+        public ObjectState ApplicationPoolState { get; set; }
+
+        public event EventHandler<NutEventArgs> SiteStateChanged;
+        public virtual void OnSiteStateChanged(NutEventArgs e)
+        {
+            SiteStateChanged?.Invoke(this, e);
+        }
 
         public LocalNut() { }
 
         public LocalNut(Uri url) : base(url)
         {
             _manager = new ServerManager();
-            _setSiteFromUrl(Url);
+            Site = NutHelper.GetSiteFromUrl(Url);
         }
 
-        private void _setSiteFromUrl(Uri url)
+        public override HttpStatusCode Peek(int timeout = 5000)
         {
-            foreach (var site in _manager.Sites)
-            {
-                foreach (var binding in site.Bindings)
-                {
-                    if (binding.Host == (binding.Host == "" ? "" : url.Host) && binding.Protocol == url.Scheme)
-                    {
-                        _site = site;
-                    }
-                }
-            }
+            ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
+            return base.Peek(timeout);
         }
 
         public override string GetBalloonTipInfo()
@@ -47,10 +47,11 @@ namespace SquirrelFinder.Nuts
             return $"Local Nut Activity ({Title})";
         }
 
+        [Obsolete("Use NutManager")]
         public virtual IQueryable<string> GetSiteBindingUrls()
         {
             var urls = new List<string>();
-            foreach (var binding in _site.Bindings)
+            foreach (var binding in Site.Bindings)
             {
                 var url = "";
                 url += binding.Protocol + "://";
@@ -64,43 +65,41 @@ namespace SquirrelFinder.Nuts
             return urls.AsQueryable();
         }
 
-        public void RecycleSite()
+        public virtual void RecycleApplicationPool()
         {
-            try
-            {
-                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
-                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Recycle();
-            }
-            catch
-            {
+            var applicationPool = NutHelper.GetApplicationPoolFromUrl(Url);
 
+            if (applicationPool.State == ObjectState.Started ||
+            applicationPool.State == ObjectState.Starting)
+            {
+                applicationPool.Recycle();
+                ApplicationPoolState = ObjectState.Started;
+                OnSiteStateChanged(new NutEventArgs(this));
             }
         }
 
-        public void StopSite()
+        public virtual void StopApplicationPool()
         {
-            try
-            {
-                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Stopped)
-                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Stop();
-            }
-            catch
-            {
+            var applicationPool = NutHelper.GetApplicationPoolFromUrl(Url);
 
+            if (applicationPool.State == ObjectState.Started ||
+            applicationPool.State == ObjectState.Starting) { 
+                applicationPool.Stop();
+                ApplicationPoolState = ObjectState.Stopped;
+                OnSiteStateChanged(new NutEventArgs(this));
             }
+
         }
 
-        public void StartSite()
+        public virtual void StartApplicationPool()
         {
-            try
-            {
-                if (_manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Started &&
-                _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].State != ObjectState.Starting)
-                    _manager.ApplicationPools[_site.Applications["/"].ApplicationPoolName].Start();
-            }
-            catch
-            {
+            var applicationPool = NutHelper.GetApplicationPoolFromUrl(Url);
 
+            if (applicationPool.State == ObjectState.Stopped ||
+            applicationPool.State == ObjectState.Stopping) { 
+                applicationPool.Start();
+                ApplicationPoolState = ObjectState.Started;
+                OnSiteStateChanged(new NutEventArgs(this));
             }
         }
     }

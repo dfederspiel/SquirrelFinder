@@ -2,6 +2,7 @@
 using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,42 +10,52 @@ using System.Web.Script.Serialization;
 
 namespace SquirrelFinder
 {
+    public class NutBox
+    {
+        public NutBox() { }
+
+        public NutBox(IEnumerable<INut> nuts)
+        {
+            Nuts = new List<Nut>();
+            SitefinityNuts = new List<SitefinityNut>();
+            LocalNuts = new List<LocalNut>();
+            LocalSitefinityNuts = new List<LocalSitefinityNut>();
+
+            foreach (var nut in nuts)
+            {
+                if (nut is LocalSitefinityNut)
+                    LocalSitefinityNuts.Add(nut as LocalSitefinityNut);
+                else if (nut is LocalNut)
+                    LocalNuts.Add(nut as LocalNut);
+                else if (nut is SitefinityNut)
+                    SitefinityNuts.Add(nut as SitefinityNut);
+                else if (nut is Nut)
+                    Nuts.Add(nut as Nut);
+                else
+                    continue;
+            }
+        }
+
+        public List<Nut> Nuts { get; set; }
+        public List<SitefinityNut> SitefinityNuts { get; set; }
+        public List<LocalNut> LocalNuts { get; set; }
+        public List<LocalSitefinityNut> LocalSitefinityNuts { get; set; }
+
+    }
 
     public static class NutSaver
     {
-        public static IList<INut> GetNuts(string json)
+        public static NutBox GetNuts(string filePath = "nutbox.json")
         {
-            var nuts = JsonConvert.DeserializeObject<List<Nut>>(json);
-
-            var output = new List<INut>();
-            foreach (var nut in nuts)
-            {
-                var directory = NutHelper.GetDirectoryFromUrl(nut.Url.ToString());
-                if (string.IsNullOrEmpty(directory))
-                {
-                    output.Add(nut);
-                }
-                else
-                {
-                    output.Add(new LocalNut
-                    {
-                        Url = nut.Url,
-                        HasShownMessage = nut.HasShownMessage,
-                        LastResponse = nut.LastResponse,
-                        State = nut.State,
-                        Title = nut.Title
-                    });
-                }
-            }
-            return output;
+            var serializedData = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<NutBox>(serializedData);
         }
 
-        public static void SaveNuts(IEnumerable<INut> nuts)
+        public static void SaveNuts(IEnumerable<INut> nuts, string filePath = "nutbox.json")
         {
-            var json = JsonConvert.SerializeObject(nuts);
+            var serializedNutBox = JsonConvert.SerializeObject(new NutBox(nuts));
+            File.Delete(filePath);
+            File.AppendAllText(filePath, serializedNutBox);
         }
-
-
-
     }
 }

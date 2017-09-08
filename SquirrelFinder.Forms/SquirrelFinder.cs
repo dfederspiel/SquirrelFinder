@@ -8,12 +8,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using SquirrelFinder.Sounds;
 
 namespace SquirrelFinder.Forms
 {
     public class SquirrelFinderSysTrayApp : Form
     {
-        static NutManager _nutMonitor;
+        static NutManager _nutManager;
+        static SoundManager _soundManager;
         static System.Windows.Forms.Timer _timer;
         static NotifyIcon _trayIcon;
         static ContextMenuStrip _trayMenu;
@@ -27,21 +29,25 @@ namespace SquirrelFinder.Forms
 
         public SquirrelFinderSysTrayApp()
         {
-            _nutMonitor = new NutManager();
-            _nutMonitor.NutCollectionChanged += _nutMonitor_NutsChanged;
-            _nutMonitor.NutChanged += _nutMonitor_NutChanged;
+            _soundManager = new SoundManager();
+
+            _nutManager = new NutManager();
+
+            _nutManager.NutCollectionChanged    += NutManager_NutsChanged;
+            _nutManager.NutChanged              += NutManager_NutChanged;
+
             ConfigureTrayMenu();
             ConfigureTrayIcon();
 
             SetTimer(5000);
         }
 
-        private void _nutMonitor_NutsChanged(object sender, NutCollectionEventArgs e)
+        private void NutManager_NutsChanged(object sender, NutCollectionEventArgs e)
         {
             //throw new NotImplementedException();
         }
 
-        private void _nutMonitor_NutChanged(object sender, NutEventArgs e)
+        private void NutManager_NutChanged(object sender, NutEventArgs e)
         {
             var nut = e.Nut;
 
@@ -74,7 +80,8 @@ namespace SquirrelFinder.Forms
                 NotificationManager.Add(nut, title, message);
                 _trayIcon.ShowBalloonTip(nut.State != NutState.Found ? 2000 : 10000);
 
-                _nutMonitor.PlayTone(tone);
+                //_soundManager.PlayTone(tone);
+
                 nut.HasShownMessage = true;
             }
         }
@@ -84,11 +91,15 @@ namespace SquirrelFinder.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SquirrelFinderSysTrayApp));
             this.SuspendLayout();
+            // 
+            // SquirrelFinderSysTrayApp
+            // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "SquirrelFinder";
+            this.Name = "SquirrelFinderSysTrayApp";
             this.Text = "Squirrel Finder";
             this.ResumeLayout(false);
+
         }
         private void SetTimer(int interval)
         {
@@ -100,8 +111,8 @@ namespace SquirrelFinder.Forms
 
         private async void _timer_Tick(object sender, EventArgs e)
         {
-            if (_nutMonitor == null) return;
-            await _nutMonitor.PeekAll();
+            if (_nutManager == null) return;
+            await _nutManager.PeekAllNuts();
         }
         #endregion
 
@@ -143,7 +154,7 @@ namespace SquirrelFinder.Forms
                 case NutState.Lost:
                     if (_configForm == null || _configForm.IsDisposed)
                     {
-                        _configForm = new Config(_nutMonitor, _trayIcon);
+                        _configForm = new Config(_nutManager, _trayIcon);
                         _configForm.MinimizeBox = false;
                         _configForm.MaximizeBox = false;
                     }
@@ -164,7 +175,7 @@ namespace SquirrelFinder.Forms
         {
             if (_configForm == null || _configForm.IsDisposed)
             {
-                _configForm = new Config(_nutMonitor, _trayIcon);
+                _configForm = new Config(_nutManager, _trayIcon);
                 _configForm.MinimizeBox = false;
                 _configForm.MaximizeBox = false;
             }

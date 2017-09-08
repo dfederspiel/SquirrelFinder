@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using SquirrelFinder.Nuts;
 using System.Threading.Tasks;
+using SquirrelFinder.Sounds;
 
 namespace SquirrelFinder.Tests
 {
@@ -14,12 +15,14 @@ namespace SquirrelFinder.Tests
     public class TheSquirrelFinder
     {
         static NutManager _monitor;
+        static SoundManager _soundManager;
         static INut _nut;
 
         [TestInitialize]
         public void Setup()
         {
             _monitor = new NutManager();
+            _soundManager = new SoundManager();
             _nut = new Nut(new Uri("http://localhost"));
         }
 
@@ -76,18 +79,17 @@ namespace SquirrelFinder.Tests
             _monitor.AddNut(new Nut(new Uri("http://codewars.com")));
             _monitor.AddNut(new Nut(new Uri("http://localhost.com")));
             _monitor.AddNut(new Nut(new Uri("http://examples.local")));
-            await _monitor.PeekAll();
+            await _monitor.PeekAllNuts();
         }
 
         [TestMethod]
         public void CanMakeASound()
         {
-            _monitor.PlayTone(SquirrelFinderSound.FlatLine);
-            _monitor.PlayTone(SquirrelFinderSound.Gears);
-            _monitor.PlayTone(SquirrelFinderSound.Squirrel);
-            _monitor.PlayTone(SquirrelFinderSound.None);
-
-            _monitor.PlayTone(SquirrelFinderSound.None);
+            _soundManager.PlayTone(SquirrelFinderSound.FlatLine);
+            _soundManager.PlayTone(SquirrelFinderSound.Gears);
+            _soundManager.PlayTone(SquirrelFinderSound.Squirrel);
+            _soundManager.PlayTone(SquirrelFinderSound.None);
+            _soundManager.PlayTone(SquirrelFinderSound.None);
         }
 
         [TestClass]
@@ -109,7 +111,7 @@ namespace SquirrelFinder.Tests
                     if(n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.RecycleSite();
+                        x.RecycleApplicationPool();
                     }
                 });
             }
@@ -123,7 +125,7 @@ namespace SquirrelFinder.Tests
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.StartSite();
+                        x.StartApplicationPool();
                     }
                 });
             }
@@ -137,7 +139,7 @@ namespace SquirrelFinder.Tests
                     if (n.GetType().GetInterfaces().Contains(typeof(ILocalNut)))
                     {
                         var x = (ILocalNut)n;
-                        x.StopSite();
+                        x.StopApplicationPool();
                     }
                 });
             }
