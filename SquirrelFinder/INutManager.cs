@@ -7,8 +7,6 @@ namespace SquirrelFinder
 {
     public interface INutManager
     {
-        List<INut> Nuts { get; set; }
-
         event EventHandler<NutEventArgs> NutChanged;
         event EventHandler<NutCollectionEventArgs> NutCollectionChanged;
 

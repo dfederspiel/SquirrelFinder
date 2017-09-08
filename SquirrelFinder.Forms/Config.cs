@@ -99,11 +99,7 @@ namespace SquirrelFinder.Forms
             if (File.Exists("nutbox.json"))
             {
                 var nutBox = NutSaver.GetNuts();
-                _nutManager.Nuts.Clear();
-                _nutManager.Nuts.AddRange(nutBox.LocalSitefinityNuts);
-                _nutManager.Nuts.AddRange(nutBox.SitefinityNuts);
-                _nutManager.Nuts.AddRange(nutBox.LocalNuts);
-                _nutManager.Nuts.AddRange(nutBox.Nuts);
+                _nutManager.OpenNutBox(nutBox);
 
                 flowLayoutPanel1.Controls.Clear();
                 foreach (var nut in _nutManager.Nuts)
