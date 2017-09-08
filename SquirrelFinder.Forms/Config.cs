@@ -111,7 +111,7 @@ namespace SquirrelFinder.Forms
                             badNuts.Add(nut);
                 }
 
-                _nutManager.Nuts.RemoveAll(n => badNuts.Contains(n));
+                _nutManager.RemoveNuts(badNuts);
 
 
                 flowLayoutPanel1.Controls.Clear();

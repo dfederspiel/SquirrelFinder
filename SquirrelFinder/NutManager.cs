@@ -105,5 +105,13 @@ namespace SquirrelFinder
                 AddNut(nut);
             }
         }
+
+        public void RemoveNuts(List<INut> nuts)
+        {
+            foreach (var nut in nuts)
+            {
+                RemoveNut(nut);
+            }
+        }
     }
 }
