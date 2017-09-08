@@ -3,7 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Telerik.Sitefinity.Services;
 
-namespace SquirrelFinder.Sitefinity
+namespace SquirrelFinder.Acorn
 {
     public class SquirrelFinderTraceListenerClient : ISquirrelFinderTraceListenerClient
     {

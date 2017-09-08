@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Logging;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Logging.TraceListeners;
 
-namespace SquirrelFinder.Sitefinity
+namespace SquirrelFinder.Acorn
 {
 
     public class SquirrelFinderLogEntry

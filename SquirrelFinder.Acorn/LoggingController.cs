@@ -1,4 +1,4 @@
-﻿using SquirrelFinder.Sitefinity;
+﻿using SquirrelFinder.Acorn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Telerik.Microsoft.Practices.EnterpriseLibrary.Logging;
 
-namespace SquirrelFinder.Sitefinity
+namespace SquirrelFinder.Acorn
 {
     public class LoggingController : ApiController
     {

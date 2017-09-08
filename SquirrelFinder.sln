@@ -11,7 +11,7 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.Forms", "SquirrelFinder.Forms\SquirrelFinder.Forms.csproj", "{27E47305-D78B-4F8F-BAD1-53E0A95981C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.Sitefinity", "SquirrelFinder.Sitefinity\SquirrelFinder.Sitefinity.csproj", "{7FAD5C9D-F063-4FD6-9586-3DE188485937}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.Acorn", "SquirrelFinder.Acorn\SquirrelFinder.Acorn.csproj", "{7FAD5C9D-F063-4FD6-9586-3DE188485937}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,7 +15,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using Telerik.Sitefinity.Abstractions;
 
-namespace SquirrelFinder.Sitefinity
+namespace SquirrelFinder.Acorn
 {
     public static class Installer
     {
