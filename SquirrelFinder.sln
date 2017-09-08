@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.Acorn", "Squ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{013C02D1-15E0-40F8-BE9D-CE5C0A1CEC3A}"
 	ProjectSection(SolutionItems) = preProject
-		SquirrelFinder.Acorn.9.2.2660.nupkg = SquirrelFinder.Acorn.9.2.2660.nupkg
+		Nuget Packages\SquirrelFinder.Acorn.9.2.2660.nupkg = Nuget Packages\SquirrelFinder.Acorn.9.2.2660.nupkg
 	EndProjectSection
 EndProject
 Global
