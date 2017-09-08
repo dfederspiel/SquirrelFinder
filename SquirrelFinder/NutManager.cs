@@ -2,6 +2,7 @@
 using SquirrelFinder.Nuts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SquirrelFinder
 {
+
     public class NutManager : INutManager
     {
         public event EventHandler<NutCollectionEventArgs> NutCollectionChanged;
@@ -28,12 +30,13 @@ namespace SquirrelFinder
 
         public NutState CurrentState = NutState.Found;
 
-        private List<INut> _nuts;
-        public List<INut> Nuts { get { return _nuts; } set { _nuts = value; } }
+        private readonly List<INut> _nuts;
+        public ReadOnlyCollection<INut> Nuts { get; private set; }
 
         public NutManager()
         {
-            Nuts = new List<INut>();
+            _nuts = new List<INut>();
+            Nuts = _nuts.AsReadOnly();
         }
 
         #region IISSiteTools
@@ -56,10 +59,10 @@ namespace SquirrelFinder
 
         public virtual void AddNut(INut nut)
         {
-            Nuts.Add(nut);
+            _nuts.Add(nut);
             nut.NutChanged += Nut_NutChanged;
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
         private void Nut_NutChanged(object sender, NutEventArgs e)
@@ -69,20 +72,37 @@ namespace SquirrelFinder
 
         public virtual void RemoveNut(INut nut)
         {
-            Nuts.Remove(nut);
+            _nuts.Remove(nut);
 
-            OnNutCollectionChanged(new NutCollectionEventArgs(Nuts.ToList()));
+            OnNutCollectionChanged(new NutCollectionEventArgs(_nuts.ToList()));
         }
 
         public async Task PeekAllNuts()
         {
-            var tempNuts = new List<INut>(Nuts);
+            var tempNuts = new List<INut>(_nuts);
             foreach (var nut in tempNuts)
             {
                 await Task.Run(() =>
                 {
                     nut.Peek();
                 });
+            }
+        }
+
+        public void OpenNutBox(NutBox nutBox)
+        {
+            _nuts.Clear();
+            AddNuts(nutBox.LocalSitefinityNuts.ToList<INut>());
+            AddNuts(nutBox.SitefinityNuts.ToList<INut>());
+            AddNuts(nutBox.LocalNuts.ToList<INut>());
+            AddNuts(nutBox.Nuts.ToList<INut>());
+        }
+
+        void AddNuts(List<INut> nuts)
+        {
+            foreach(var nut in nuts)
+            {
+                AddNut(nut);
             }
         }
     }

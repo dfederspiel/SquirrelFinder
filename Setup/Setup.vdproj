@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1B5854217945791880735158494EBCA1"
+        "OwnerKey" = "8:_BB8CBD10A1854985850BBC84216B65C2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_228D4FDFC1E5C6B3FD78C182B437E202"
         "OwnerKey" = "8:_BB8CBD10A1854985850BBC84216B65C2"
         "MsmSig" = "8:_UNDEFINED"
@@ -22,7 +28,7 @@
         "Entry"
         {
         "MsmKey" = "8:_228D4FDFC1E5C6B3FD78C182B437E202"
-        "OwnerKey" = "8:_CC7B01ADA6729FD1DF908B02F98E0DA8"
+        "OwnerKey" = "8:_1B5854217945791880735158494EBCA1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -34,19 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_98F015810FE854775EB0B5E5AF459749"
-        "OwnerKey" = "8:_CC7B01ADA6729FD1DF908B02F98E0DA8"
+        "OwnerKey" = "8:_1B5854217945791880735158494EBCA1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_BB8CBD10A1854985850BBC84216B65C2"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_CC7B01ADA6729FD1DF908B02F98E0DA8"
-        "OwnerKey" = "8:_BB8CBD10A1854985850BBC84216B65C2"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -64,7 +64,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CC7B01ADA6729FD1DF908B02F98E0DA8"
+        "OwnerKey" = "8:_1B5854217945791880735158494EBCA1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -180,6 +180,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1B5854217945791880735158494EBCA1"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SquirrelFinder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1B5854217945791880735158494EBCA1"
+                    {
+                    "Name" = "8:SquirrelFinder.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SquirrelFinder.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_228D4FDFC1E5C6B3FD78C182B437E202"
             {
             "AssemblyRegister" = "3:1"
@@ -225,37 +256,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.Web.Administration.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CC7B01ADA6729FD1DF908B02F98E0DA8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SquirrelFinder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_CC7B01ADA6729FD1DF908B02F98E0DA8"
-                    {
-                    "Name" = "8:SquirrelFinder.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:SquirrelFinder.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
@@ -336,7 +336,7 @@
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -361,7 +361,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Squirrel Finder"
         "ProductCode" = "8:{9DE0BB89-EF3D-4619-9714-D41638D8CBBB}"
-        "PackageCode" = "8:{CD4614B8-112C-4950-B906-22294B79F8B3}"
+        "PackageCode" = "8:{63402105-7E8C-41A1-ACF2-AEF52106DF86}"
         "UpgradeCode" = "8:{0CA23091-6D02-429B-9E8E-09DA1AD574D8}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -481,6 +481,20 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_A1EC45740C114BBD9A0377553621BA88"
+            {
+            "Name" = "8:Squirrel Finder"
+            "Arguments" = "8:SquirrelFinder.Forms.exe"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
+            "Folder" = "8:_22B5A50B7FDC4C4ABC393881C7E69AA6"
+            "WorkingFolder" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
@@ -910,7 +924,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_BB8CBD10A1854985850BBC84216B65C2"
             {
-            "SourcePath" = "8:..\\SquirrelFinder.Forms\\obj\\Debug\\SquirrelFinder.Forms.exe"
+            "SourcePath" = "8:..\\SquirrelFinder.Forms\\obj\\Release\\SquirrelFinder.Forms.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8A0179ADE5A04D7BA5DD4CAB52940C95"
