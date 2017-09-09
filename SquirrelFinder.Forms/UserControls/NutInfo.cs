@@ -55,7 +55,7 @@ namespace SquirrelFinder.Forms.UserControls
 
             if (n2 is ISitefinityNut)
             {
-                linkLabelErrors.Click += LinkLabelErrors_Click;
+                linkLabelErrors.Visible = true;
             }
             else
             {
@@ -68,13 +68,13 @@ namespace SquirrelFinder.Forms.UserControls
             UpdateButtonToggleText();
         }
 
-        private void LinkLabelErrors_Click(object sender, EventArgs e)
-        {
-            var sNut = _nut as ISitefinityNut;
-            _errorsForm = new Errors(sNut.LogEntries);
-            _errorsForm.Show();
+        //private void LinkLabelErrors_Click(object sender, EventArgs e)
+        //{
+        //    var sNut = _nut as ISitefinityNut;
+        //    _errorsForm = new Errors(sNut.LogEntries);
+        //    _errorsForm.Show();
 
-        }
+        //}
 
         private void NutInfo_SiteStateChanged(object sender, NutEventArgs e)
         {
@@ -261,6 +261,11 @@ namespace SquirrelFinder.Forms.UserControls
         private void LinkLabelUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("chrome.exe", _nut.Url.ToString());
+        }
+
+        private void linkLabelErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("chrome.exe", _nut.Url.ToString() + "squirreldata");
         }
     }
 }

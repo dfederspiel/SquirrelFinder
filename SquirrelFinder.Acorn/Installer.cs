@@ -1,19 +1,10 @@
-﻿using System;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Telerik.Microsoft.Practices.Unity;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Data;
 using Telerik.Sitefinity.Logging;
-using System.Web.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using System.Web.Routing;
-using System.Web.Security;
-using System.Web.SessionState;
-using Telerik.Sitefinity.Abstractions;
 
 namespace SquirrelFinder.Acorn
 {
@@ -41,6 +32,12 @@ namespace SquirrelFinder.Acorn
                 name: "SquirrelFinder",
                 routeTemplate: "squirrel/{controller}/{action}",
                 defaults: new { action = RouteParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "Default",                                             
+                "squirreldata/{controller}/{action}/{id}",                         
+                new { controller = "SquirrelFinderController", action = "Index", id = "" }
             );
         }
 

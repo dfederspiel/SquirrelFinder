@@ -11,15 +11,22 @@ namespace SquirrelFinder.Acorn
 {
     public class LoggingController : ApiController
     {
+
         public List<SquirrelFinderLogEntry> Get()
         {
             return SquirrelFinderTraceListener.LogEntries;
         }
 
         [HttpGet]
-        public SquirrelFinderLogEntry GetLast()
+        public int Count()
         {
-            return SquirrelFinderTraceListener.LogEntries.Last();
+            return SquirrelFinderTraceListener.LogEntries.Count;
+        }
+
+        [HttpGet]
+        public SquirrelFinderLogEntry Get(int index)
+        {
+            return SquirrelFinderTraceListener.LogEntries.ElementAt(index);
         }
 
         [HttpGet]

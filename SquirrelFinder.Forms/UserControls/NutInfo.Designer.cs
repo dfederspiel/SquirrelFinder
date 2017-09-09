@@ -113,6 +113,7 @@
             this.linkLabelErrors.TabStop = true;
             this.linkLabelErrors.Text = "Errors (0)";
             this.linkLabelErrors.Visible = false;
+            this.linkLabelErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelErrors_LinkClicked);
             // 
             // NutInfo
             // 
