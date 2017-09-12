@@ -50,7 +50,7 @@ namespace SquirrelFinder.Acorn
             var lines = new List<string>();
             foreach (Match m in Regex.Matches(LogEntry.Message, pattern, options))
             {
-                if(m.Groups.Count > 1)
+                if (m.Groups.Count > 1)
                     lines.Add(m.Groups[1].Value);
             }
 
@@ -63,7 +63,7 @@ namespace SquirrelFinder.Acorn
 
             foreach (Match m in Regex.Matches(LogEntry.Message, pattern, options))
             {
-                if(m.Groups.Count > 1)
+                if (m.Groups.Count > 1)
                     return m.Groups[1].Value;
             }
 
@@ -75,17 +75,20 @@ namespace SquirrelFinder.Acorn
     {
         public static List<SquirrelFinderLogEntry> LogEntries { get; private set; }
 
-        public SquirrelFinderTraceListener() : this(new SquirrelFinderTraceListenerClient()) { }
+        public SquirrelFinderTraceListener() : this(new SquirrelFinderTraceListenerClient())
+        {
+            LogEntries = new List<SquirrelFinderLogEntry>();
+        }
 
         public SquirrelFinderTraceListener(SquirrelFinderTraceListenerClient client)
         {
-            this.traceListenerClient = client;
+            traceListenerClient = client;
             LogEntries = new List<SquirrelFinderLogEntry>();
         }
 
         public override void TraceData(TraceEventCache eventCache, string source, TraceEventType eventType, int id, object data)
         {
-            if ((this.Filter == null) || this.Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
+            if ((Filter == null) || Filter.ShouldTrace(eventCache, source, eventType, id, null, null, data, null))
             {
                 if (data is LogEntry)
                 {
@@ -99,12 +102,12 @@ namespace SquirrelFinder.Acorn
                 LogEntries.Add(new SquirrelFinderLogEntry(data as LogEntry, eventCache));
             }
         }
-        
+
         public override void Write(string message)
         {
             traceListenerClient.LogMessage(message);
         }
-        
+
         public override void WriteLine(string message)
         {
             traceListenerClient.LogMessage(message + Environment.NewLine);
