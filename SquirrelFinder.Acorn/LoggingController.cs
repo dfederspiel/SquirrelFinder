@@ -26,7 +26,10 @@ namespace SquirrelFinder.Acorn
         [HttpGet]
         public SquirrelFinderLogEntry Get(int index)
         {
-            return SquirrelFinderTraceListener.LogEntries.ElementAt(index);
+            if (SquirrelFinderTraceListener.LogEntries.Count > 0)
+                return SquirrelFinderTraceListener.LogEntries.ElementAt(index);
+
+            return null;
         }
 
         [HttpGet]
