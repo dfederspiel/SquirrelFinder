@@ -10,7 +10,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:release": "ncp  build ../SquirrelFinder.SitefinityWebApp/SquirrelMonitor",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "postsetup": "say Setup complete!"
 }

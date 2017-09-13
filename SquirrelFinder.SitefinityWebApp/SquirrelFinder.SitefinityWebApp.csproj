@@ -1035,6 +1035,11 @@
     <Content Include="Sitefinity\Services\Versioning\HistoryService.svc" />
     <Content Include="Sitefinity\Services\Workflow\WorkflowDefinitionService.svc" />
     <Content Include="Sitefinity\Services\Workflow\WorkflowService.svc" />
+    <Content Include="SquirrelFinder\build\favicon.ico" />
+    <Content Include="SquirrelFinder\build\index.html" />
+    <Content Include="SquirrelFinder\build\service-worker.js" />
+    <Content Include="SquirrelFinder\build\static\css\main.cacbacc7.css" />
+    <Content Include="SquirrelFinder\build\static\js\main.d5d34999.js" />
     <Content Include="SquirrelFinder\public\favicon.ico" />
     <Content Include="SquirrelFinder\public\index.html" />
     <Content Include="SquirrelFinder\src\Entry.js" />
@@ -1046,9 +1051,6 @@
     <Content Include="SquirrelFinder\src\SquirrelFinder.css" />
     <Content Include="SquirrelFinder\src\SquirrelFinder.js" />
     <Content Include="SquirrelFinder\src\SquirrelFinder.test.js" />
-    <Content Include="SquirrelFinder\static\css\main.cacbacc7.css" />
-    <Content Include="SquirrelFinder\static\js\main.ce41ae9d.js" />
-    <Content Include="SquirrelFinder\static\media\logo.5d5d9eef.svg" />
     <Content Include="Views\Shared\SquirrelData.cshtml" />
     <Content Include="Views\web.config" />
     <Content Include="web.config">
@@ -1220,9 +1222,11 @@
     <Content Include="ResourcePackages\LICENSE.md" />
     <Content Include="ResourcePackages\README.md" />
     <Content Include="ResourcePackages\Bootstrap\README.md" />
-    <Content Include="SquirrelFinder\static\css\main.cacbacc7.css.map" />
-    <Content Include="SquirrelFinder\static\js\main.ce41ae9d.js.map" />
     <Content Include="SquirrelFinder\public\manifest.json" />
+    <Content Include="SquirrelFinder\build\asset-manifest.json" />
+    <Content Include="SquirrelFinder\build\manifest.json" />
+    <Content Include="SquirrelFinder\build\static\css\main.cacbacc7.css.map" />
+    <Content Include="SquirrelFinder\build\static\js\main.d5d34999.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
