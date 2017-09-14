@@ -32,8 +32,8 @@ export default class Entry extends Component {
                     <li>MachineName: {entry.MachineName}</li>
                     <li>RequestedUrl: <a href={entry.RequestedUrl}>{entry.RequestedUrl}</a></li>
                 </ul>
-                {/*<pre>{entry.LogEntry.message}</pre>
-                <pre>{entry.CallStack}</pre>*/}
+                <pre>{entry.LogEntry.message}</pre>
+                <pre>{entry.CallStack}</pre>
              </div>
         );
     }

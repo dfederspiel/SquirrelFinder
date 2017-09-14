@@ -42,8 +42,7 @@ namespace SquirrelFinder.Nuts
 
                     LastResponse = response.StatusCode;
 
-                    if (LoggingEnabled)
-                        GetLogEntries();
+                    GetLogEntries();
 
                     OnNutChanged(new NutEventArgs(this));
                 }

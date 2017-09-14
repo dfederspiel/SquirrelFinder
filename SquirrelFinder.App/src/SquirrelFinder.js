@@ -20,8 +20,11 @@ class SquirrelFinder extends Component {
 
     componentDidMount() {
         fetch('/squirrel/logging/get?index=0')
-          .then(response => response.json())
-          .then(data =>  this.setState({ data: data }));
+            .then(response => response.json())
+            .then(data =>  this.setState({ data: data }))
+            .catch(function (error) {  
+                //console.log('Request failed', error);  
+            });
     }
 
     render() {

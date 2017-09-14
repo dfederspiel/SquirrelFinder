@@ -44,6 +44,7 @@ namespace SquirrelFinder.Acorn
         private static void Log_Configuring(object sender, LogConfiguringEventArgs e)
         {
             var defaultConfigurator = ObjectFactory.Resolve<ISitefinityLogCategoryConfigurator>();
+
             var customConfigurator = new SquirrelFinderConfigurator(defaultConfigurator, ConfigurationPolicy.ErrorLog);
             ObjectFactory.Container.RegisterInstance<ISitefinityLogCategoryConfigurator>(customConfigurator);
         }

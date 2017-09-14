@@ -17,7 +17,6 @@ namespace SquirrelFinder.Forms.UserControls
     {
         INut _nut;
         NutManager _nutMonitor;
-        Errors _errorsForm;
 
         public NutInfo()
         {
@@ -174,7 +173,7 @@ namespace SquirrelFinder.Forms.UserControls
             {
                 
                 var sNut = _nut as ISitefinityNut;
-                if(sNut.GetLogEntries() != null)
+                if(sNut.LoggingEnabled)
                 {
                     SetControlText(linkLabelErrors, $"Errors ({(_nut as ISitefinityNut).LogEntries?.Count ?? 0 })");
                     ShowControl(linkLabelErrors);
@@ -265,7 +264,7 @@ namespace SquirrelFinder.Forms.UserControls
 
         private void linkLabelErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("chrome.exe", _nut.Url.ToString() + "squirreldata");
+            Process.Start("chrome.exe", _nut.Url.ToString() + "squirrelmonitor");
         }
     }
 }

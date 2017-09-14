@@ -15,7 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.Acorn", "Squ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{013C02D1-15E0-40F8-BE9D-CE5C0A1CEC3A}"
 	ProjectSection(SolutionItems) = preProject
-		Nuget Packages\SquirrelFinder.Acorn.9.2.2660.nupkg = Nuget Packages\SquirrelFinder.Acorn.9.2.2660.nupkg
+		Nuget Packages\SquirrelFinder.Acorn.0.2.0.6.nupkg = Nuget Packages\SquirrelFinder.Acorn.0.2.0.6.nupkg
+		Nuget Packages\SquirrelFinder.Acorn.0.2.0.7.nupkg = Nuget Packages\SquirrelFinder.Acorn.0.2.0.7.nupkg
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SquirrelFinder.SitefinityWebApp", "SquirrelFinder.SitefinityWebApp\SquirrelFinder.SitefinityWebApp.csproj", "{3E598CFC-83B2-494A-A97F-32EB24D797C6}"

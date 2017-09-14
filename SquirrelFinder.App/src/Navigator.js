@@ -16,7 +16,10 @@ export default class Navigator extends Component {
 
         fetch('/squirrel/logging/count')
           .then(response => response.json())
-          .then(count =>  this.setState({ count: count }));
+          .then(count =>  this.setState({ count: count }))
+          .catch(function (error) {  
+                //console.log('Request failed', error);  
+            });
     }
 
     handleErrorChanged(data){
@@ -26,7 +29,10 @@ export default class Navigator extends Component {
     handleClearClick() {
         fetch('/squirrel/logging/clear')
           .then(data =>  this.setState({ count: 0, currentIndex: 0 }))
-          .then(() => this.handleErrorChanged(null));
+          .then(() => this.handleErrorChanged(null))
+          .catch(function (error) {  
+                //console.log('Request failed', error);  
+            });
     }
 
     handleNextClick() {
@@ -38,7 +44,10 @@ export default class Navigator extends Component {
 
         fetch('/squirrel/logging/get?index=' + newIndex)
           .then(response => response.json())
-          .then(data => this.handleErrorChanged(data));
+          .then(data => this.handleErrorChanged(data))
+          .catch(function (error) {  
+                //console.log('Request failed', error);  
+            });
     }
 
     handlePreviousClick() {
@@ -50,7 +59,10 @@ export default class Navigator extends Component {
 
         fetch('/squirrel/logging/get?index=' + newIndex)
           .then(response => response.json())
-          .then(data => this.handleErrorChanged(data));
+          .then(data => this.handleErrorChanged(data))
+          .catch(function (error) {  
+                //console.log('Request failed', error);  
+            });
     }
 
     render() {
