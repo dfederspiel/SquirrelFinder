@@ -32,10 +32,10 @@ namespace SquirrelFinder.Nuts
             Site = NutHelper.GetSiteFromUrl(Url);
         }
 
-        public override HttpStatusCode Peek(int timeout = 5000)
+        public override void Peek(int timeout = 5000)
         {
             ApplicationPoolState = NutHelper.GetApplicationPoolFromUrl(Url).State;
-            return base.Peek(timeout);
+            base.Peek(timeout);
         }
 
         public override string GetBalloonTipInfo()

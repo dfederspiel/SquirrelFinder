@@ -52,11 +52,28 @@ namespace SquirrelFinder.Forms.UserControls
                 buttonToggle.Visible = false;
             }
 
+            if (n2 is ISitefinityNut)
+            {
+                linkLabelErrors.Visible = true;
+            }
+            else
+            {
+                linkLabelErrors.Visible = false;
+            }
+
             ButtonRemove.Click += ButtonRemove_Click;
 
             UpdateControl();
             UpdateButtonToggleText();
         }
+
+        //private void LinkLabelErrors_Click(object sender, EventArgs e)
+        //{
+        //    var sNut = _nut as ISitefinityNut;
+        //    _errorsForm = new Errors(sNut.LogEntries);
+        //    _errorsForm.Show();
+
+        //}
 
         private void NutInfo_SiteStateChanged(object sender, NutEventArgs e)
         {
@@ -72,7 +89,7 @@ namespace SquirrelFinder.Forms.UserControls
             }
         }
 
-        delegate void SetTextCallback(ILocalNut nut);
+        delegate void SetButtonTextCallback(ILocalNut nut);
         private void SetButtonTextFromState(ILocalNut localNut)
         {
             var text = "";
@@ -93,12 +110,53 @@ namespace SquirrelFinder.Forms.UserControls
 
             if (buttonToggle.InvokeRequired)
             {
-                SetTextCallback d = new SetTextCallback(SetButtonTextFromState);
+                SetButtonTextCallback d = new SetButtonTextCallback(SetButtonTextFromState);
                 Invoke(d, new object[] { localNut });
             }
             else
             {
                 buttonToggle.Text = text;
+            }
+        }
+
+        delegate void SetControlTextCallback(Control c, string text);
+        private void SetControlText(Control c, string text)
+        {
+            if (c.InvokeRequired)
+            {
+                SetControlTextCallback d = new SetControlTextCallback(SetControlText);
+                Invoke(d, new object[] { c, text });
+            }
+            else
+            {
+                c.Text = text;
+            }
+        }
+
+        delegate void ControlCallback(Control c);
+        private void ShowControl(Control c)
+        {
+            if (c.InvokeRequired)
+            {
+                ControlCallback d = new ControlCallback(ShowControl);
+                Invoke(d, new object[] { c });
+            }
+            else
+            {
+                c.Show();
+            }
+        }
+
+        private void HideControl(Control c)
+        {
+            if (c.InvokeRequired)
+            {
+                ControlCallback d = new ControlCallback(HideControl);
+                Invoke(d, new object[] { c });
+            }
+            else
+            {
+                c.Hide();
             }
         }
 
@@ -110,11 +168,28 @@ namespace SquirrelFinder.Forms.UserControls
                 var state = GetApplicationPoolState();
                 SetButtonTextFromState(_nut as ILocalNut);
             }
+
+            if (_nut is ISitefinityNut)
+            {
+                
+                var sNut = _nut as ISitefinityNut;
+                if(sNut.LoggingEnabled)
+                {
+                    SetControlText(linkLabelErrors, $"Errors ({(_nut as ISitefinityNut).LogEntries?.Count ?? 0 })");
+                    ShowControl(linkLabelErrors);
+                }
+                else
+                    HideControl(linkLabelErrors);
+            }
         }
 
         private ObjectState GetApplicationPoolState()
         {
-            return NutHelper.GetApplicationPoolFromUrl(_nut.Url).State;
+            var appPool = NutHelper.GetApplicationPoolFromUrl(_nut.Url);
+            if (appPool != null)
+                return appPool.State;
+
+            return ObjectState.Unknown;
         }
 
         private void SetNutInfoColorStatus()
@@ -185,6 +260,11 @@ namespace SquirrelFinder.Forms.UserControls
         private void LinkLabelUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("chrome.exe", _nut.Url.ToString());
+        }
+
+        private void linkLabelErrors_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("chrome.exe", _nut.Url.ToString() + "squirrelmonitor");
         }
     }
 }

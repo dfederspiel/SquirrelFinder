@@ -1,6 +1,7 @@
 ﻿using SquirrelFinder.Forms.UserControls;
 using SquirrelFinder.Nuts;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -100,6 +101,18 @@ namespace SquirrelFinder.Forms
             {
                 var nutBox = NutSaver.GetNuts();
                 _nutManager.OpenNutBox(nutBox);
+
+
+                var badNuts = new List<INut>();
+                foreach (var nut in _nutManager.Nuts)
+                {
+                    if (nut is ILocalNut)
+                        if (!NutHelper.LocalSiteExists(nut as ILocalNut))
+                            badNuts.Add(nut);
+                }
+
+                _nutManager.RemoveNuts(badNuts);
+
 
                 flowLayoutPanel1.Controls.Clear();
                 foreach (var nut in _nutManager.Nuts)

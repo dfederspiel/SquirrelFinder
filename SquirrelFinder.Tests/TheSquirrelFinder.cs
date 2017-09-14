@@ -66,8 +66,7 @@ namespace SquirrelFinder.Tests
         public void GivenANutPeeksANut()
         {
             _monitor.AddNut(new Nut(new Uri("http://google.com")));
-            var response = _monitor.Nuts.FirstOrDefault().Peek();
-            Assert.AreEqual(HttpStatusCode.OK, response);
+            _monitor.Nuts.FirstOrDefault().Peek();
         }
 
         [Ignore]

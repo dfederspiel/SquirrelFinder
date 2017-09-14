@@ -90,5 +90,14 @@ namespace SquirrelFinder
             var manager = new ServerManager();
             return site.Bindings.Select(b => b.Protocol + "://" + (b.Host == string.Empty ? "localhost" : b.Host));
         }
+
+        public static bool LocalSiteExists(ILocalNut nut)
+        {
+            var site = GetSiteFromUrl(nut.Url);
+            if (site == null)
+                return false;
+
+            return true;
+        }
     }
 }
