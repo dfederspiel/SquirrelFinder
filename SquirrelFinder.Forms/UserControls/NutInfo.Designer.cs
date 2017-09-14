@@ -35,6 +35,7 @@
             this.panelStatusLight = new System.Windows.Forms.Panel();
             this.linkLabelAppDirectory = new System.Windows.Forms.LinkLabel();
             this.linkLabelLogs = new System.Windows.Forms.LinkLabel();
+            this.linkLabelErrors = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // buttonToggle
@@ -102,11 +103,24 @@
             this.linkLabelLogs.TabStop = true;
             this.linkLabelLogs.Text = "Logs...";
             // 
+            // linkLabelErrors
+            // 
+            this.linkLabelErrors.AutoSize = true;
+            this.linkLabelErrors.Location = new System.Drawing.Point(240, 5);
+            this.linkLabelErrors.Name = "linkLabelErrors";
+            this.linkLabelErrors.Size = new System.Drawing.Size(49, 13);
+            this.linkLabelErrors.TabIndex = 8;
+            this.linkLabelErrors.TabStop = true;
+            this.linkLabelErrors.Text = "Errors (0)";
+            this.linkLabelErrors.Visible = false;
+            this.linkLabelErrors.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelErrors_LinkClicked);
+            // 
             // NutInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.linkLabelErrors);
             this.Controls.Add(this.linkLabelLogs);
             this.Controls.Add(this.linkLabelAppDirectory);
             this.Controls.Add(this.panelStatusLight);
@@ -129,5 +143,6 @@
         private System.Windows.Forms.Panel panelStatusLight;
         private System.Windows.Forms.LinkLabel linkLabelAppDirectory;
         private System.Windows.Forms.LinkLabel linkLabelLogs;
+        private System.Windows.Forms.LinkLabel linkLabelErrors;
     }
 }

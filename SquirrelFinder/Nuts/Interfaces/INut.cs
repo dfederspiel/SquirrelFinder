@@ -15,7 +15,7 @@ namespace SquirrelFinder.Nuts
         NutState State { get; set; }
         bool HasShownMessage { get; set; }
 
-        HttpStatusCode Peek(int timeout = 5000);
+        void Peek(int timeout = 5000);
 
         string GetBalloonTipInfo();
         string GetBalloonTipTitle();

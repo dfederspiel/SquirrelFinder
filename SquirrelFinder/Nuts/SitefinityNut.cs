@@ -9,13 +9,21 @@ using System.Threading.Tasks;
 
 namespace SquirrelFinder.Nuts
 {
-    public class SitefinityNut : Nut
+    public class SitefinityNut : Nut, ISitefinityNut
     {
+        public List<SquirrelFinderLogEntry> LogEntries { get; set; }
+
+        public bool LoggingEnabled { get; set; }
+
         public SitefinityNut() : base() { }
 
-        public SitefinityNut(Uri url) : base(url) { }
+        public SitefinityNut(Uri url) : base(url)
+        {
+            LogEntries = new List<SquirrelFinderLogEntry>();
+            LoggingEnabled = true;
+        }
 
-        public override HttpStatusCode Peek(int timeout = 5000)
+        public override void Peek(int timeout = 5000)
         {
             NutState currentState = State;
             var request = WebRequest.Create(Url);
@@ -34,8 +42,9 @@ namespace SquirrelFinder.Nuts
 
                     LastResponse = response.StatusCode;
 
+                    GetLogEntries();
+
                     OnNutChanged(new NutEventArgs(this));
-                    return response.StatusCode;
                 }
             }
             catch
@@ -47,7 +56,6 @@ namespace SquirrelFinder.Nuts
                 HasShownMessage = false;
 
             OnNutChanged(new NutEventArgs(this));
-            return HttpStatusCode.NotFound;
         }
 
         public override string GetBalloonTipInfo()
@@ -58,6 +66,33 @@ namespace SquirrelFinder.Nuts
         public override string GetBalloonTipTitle()
         {
             return $"Sitefinity Nut Activity ({Title})";
+        }
+
+        public List<SquirrelFinderLogEntry> GetLogEntries()
+        {
+            if (State != NutState.Found) return null;
+
+            var request = WebRequest.Create(Url.ToString() + "/squirrel/logging/get");
+            request.Timeout = 5000;
+            try
+            {
+
+                WebResponse response = request.GetResponse();
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string responseFromServer = reader.ReadToEnd();
+                var entries = JsonConvert.DeserializeObject<List<SquirrelFinderLogEntry>>(responseFromServer);
+                LogEntries = entries;
+                LoggingEnabled = true;
+                return entries;
+
+            }
+            catch (Exception ex)
+            {
+                LoggingEnabled = false;
+            }
+
+            return null;
         }
     }
 }
