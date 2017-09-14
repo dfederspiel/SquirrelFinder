@@ -861,7 +861,6 @@
     <Compile Include="App_Start\RazorGeneratorMvcStart.cs" />
     <Compile Include="AzureWebRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mvc\Controllers\SquirrelFinderController.cs" />
     <Compile Include="Mvc\Models\SquirrelFinderModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1035,24 +1034,11 @@
     <Content Include="Sitefinity\Services\Versioning\HistoryService.svc" />
     <Content Include="Sitefinity\Services\Workflow\WorkflowDefinitionService.svc" />
     <Content Include="Sitefinity\Services\Workflow\WorkflowService.svc" />
-    <Content Include="SquirrelFinder\build\favicon.ico" />
-    <Content Include="SquirrelFinder\build\index.html" />
-    <Content Include="SquirrelFinder\build\service-worker.js" />
-    <Content Include="SquirrelFinder\build\static\css\main.cacbacc7.css" />
-    <Content Include="SquirrelFinder\build\static\js\main.d5d34999.js" />
-    <Content Include="SquirrelFinder\public\favicon.ico" />
-    <Content Include="SquirrelFinder\public\index.html" />
-    <Content Include="SquirrelFinder\src\Entry.js" />
-    <Content Include="SquirrelFinder\src\index.css" />
-    <Content Include="SquirrelFinder\src\index.js" />
-    <Content Include="SquirrelFinder\src\logo.svg" />
-    <Content Include="SquirrelFinder\src\Navigator.js" />
-    <Content Include="SquirrelFinder\src\registerServiceWorker.js" />
-    <Content Include="SquirrelFinder\src\SquirrelFinder.css" />
-    <Content Include="SquirrelFinder\src\SquirrelFinder.js" />
-    <Content Include="SquirrelFinder\src\SquirrelFinder.test.js" />
-    <Content Include="Views\Shared\SquirrelData.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="SquirrelMonitor\favicon.ico" />
+    <Content Include="SquirrelMonitor\index.html" />
+    <Content Include="SquirrelMonitor\service-worker.js" />
+    <Content Include="SquirrelMonitor\static\css\main.cacbacc7.css" />
+    <Content Include="SquirrelMonitor\static\js\main.ddc13e2b.js" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1222,11 +1208,10 @@
     <Content Include="ResourcePackages\LICENSE.md" />
     <Content Include="ResourcePackages\README.md" />
     <Content Include="ResourcePackages\Bootstrap\README.md" />
-    <Content Include="SquirrelFinder\public\manifest.json" />
-    <Content Include="SquirrelFinder\build\asset-manifest.json" />
-    <Content Include="SquirrelFinder\build\manifest.json" />
-    <Content Include="SquirrelFinder\build\static\css\main.cacbacc7.css.map" />
-    <Content Include="SquirrelFinder\build\static\js\main.d5d34999.js.map" />
+    <Content Include="SquirrelMonitor\asset-manifest.json" />
+    <Content Include="SquirrelMonitor\manifest.json" />
+    <Content Include="SquirrelMonitor\static\css\main.cacbacc7.css.map" />
+    <Content Include="SquirrelMonitor\static\js\main.ddc13e2b.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
