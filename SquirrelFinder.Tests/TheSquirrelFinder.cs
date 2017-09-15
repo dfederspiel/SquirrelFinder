@@ -68,8 +68,7 @@ namespace SquirrelFinder.Tests
             _monitor.AddNut(new Nut(new Uri("http://google.com")));
             _monitor.Nuts.FirstOrDefault().Peek();
         }
-
-        [Ignore]
+        
         [TestMethod]
         public async Task GivenManyNutsPeeksAllNuts()
         {
@@ -206,20 +205,6 @@ namespace SquirrelFinder.Tests
             {
                 _nutWatcher = new NutManager();
                 _nutWatcher.AddNut(new LocalSitefinityNut(new Uri("http://basitefinity.local")));
-            }
-
-            [Ignore]
-            [TestMethod]
-            public void CanWatchLogFiles()
-            {
-
-            }
-
-            [Ignore]
-            [TestMethod]
-            public void CanWatchBinDirectory()
-            {
-
             }
         }
     }
